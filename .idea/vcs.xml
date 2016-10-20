@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Tom mappe/L-system" vcs="Git" />
     <mapping directory="C:\Proto2\L-system" vcs="Git" />
   </component>
