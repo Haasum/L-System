@@ -51,9 +51,8 @@ public class txt {
     }
 
         public String getTxtFile() {
-            //return this.inputFromTxt; //når input fra textFil skal virke
-           // return "A:ABA,B:BCB,C:ACA"; //så længe vi tester prototypen er det denne linje der virker
-            return "A:ABA,B:BCB,"; // til test
+            return this.inputFromTxt; //når input fra textFil skal virke
+            // return "A:ABA,B:BCB,C:ACA,"; // til test
         }
 
 
