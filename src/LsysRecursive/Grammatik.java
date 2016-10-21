@@ -19,38 +19,47 @@ public class Grammatik {
     }
 
     public void saveRules() {
-        for (int i = 1; i < textFile.length(); i++) {
+
+        for (int i = 0; i < textFile.length(); i++) {
 
             StringBuilder buildRule = new StringBuilder();
 
             char current = textFile.charAt(i);
+
             if (current == ':') {
                 currentLetter = textFile.charAt(i - 1);
             }
+
             if (current == ',') {
                 sendRules();
+                buildRule.setLength(0);
             }
 
-            if (current == '.') {
-                break;
-            }
-            else if (current != ':') { // ellers, hvis current ikke er , eller " så skal den appendes til buildRule, der er en stringbuilder
+
+            else if (current != ':' && current != ',') { // ellers, hvis current ikke er , eller " så skal den appendes til buildRule, der er en stringbuilder
 
                 buildRule.append(current);
                 currRule += String.valueOf(buildRule); //currRule får buildRules string
 
-
             }
 
-
-
+            else if (current == '.') {
+                return;
             }
 
+            }
+    }
+
+    private void sendRules() {
+        System.out.println("the rule-letter is " + currentLetter);
+        System.out.println("the rule is " + currRule);
+        currRule = "";
+    }
+}
 
 
 
-
-        /*
+ /*
         Det her virker ikke. dvs den gemmer ikke reglen. Vi havde svært ved at få det til at virke, da RULE-klassen
         er lidt rodet/ikke virker.
 
@@ -63,7 +72,7 @@ public class Grammatik {
 
 
 
-        //det næste er fra den gamle grammatik klasse. sletter når vi alle sammen er her.
+//det næste er fra den gamle grammatik klasse. sletter når vi alle sammen er her.
 
          /*   for (int j = i + 1; j < textFile.length() - i; j++) {
                     char currPartRule = textFile.charAt(j);
@@ -76,16 +85,8 @@ public class Grammatik {
 
                     } */
 
-                  //  currRule += currPartRule;
+//  currRule += currPartRule;
 
-                }
-
-    private void sendRules() {
-        System.out.println("the rule-letter is " + currentLetter);
-        System.out.println("the rule is " + currRule);
-        currRule = "";
-    }
-}
 
 //det er her den fucker med os
           // Rule rule = new Rule(currentLetter, currRule);
