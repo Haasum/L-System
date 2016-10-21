@@ -12,7 +12,7 @@ public class Grammatik {
     public Grammatik(String textFile) {
         System.out.println("Grammatik is ON");
 
-        this.textFile = textFile;
+        this.textFile = textFile + '.';
         saveRules();
         ruleset = new ArrayList<>();
 
@@ -20,11 +20,15 @@ public class Grammatik {
 
     public void saveRules() {
 
-        for (int i = 0; i < textFile.length(); i++) {
+        for (int i = 0; i < textFile.length()-1; i++) {
 
             StringBuilder buildRule = new StringBuilder();
 
             char current = textFile.charAt(i);
+
+          /*  if (textFile.charAt(i + 1) == ':') {
+                System.out.println("LOL");
+            }  */
 
             if (current == ':') {
                 currentLetter = textFile.charAt(i - 1);
@@ -36,7 +40,9 @@ public class Grammatik {
             }
 
 
-            else if (current != ':' && current != ',') { // ellers, hvis current ikke er , eller " så skal den appendes til buildRule, der er en stringbuilder
+           // else if (current != ':' && current != ',') { // ellers, hvis current ikke er , eller " så skal den appendes til buildRule, der er en stringbuilder
+
+             if (textFile.charAt(i+1) != ':' && current != ':' && current != ',') {
 
                 buildRule.append(current);
                 currRule += String.valueOf(buildRule); //currRule får buildRules string
