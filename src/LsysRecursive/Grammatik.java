@@ -13,68 +13,47 @@ public class Grammatik {
         System.out.println("Grammatik is ON");
 
         this.textFile = textFile + '.';
-        saveRules();
+        readRules();
         ruleset = new ArrayList<>();
 
     }
 
-    public void saveRules() {
+    public void readRules() { //læser reglerne og deler dem op i i rule-letter og rule
 
-        for (int i = 0; i < textFile.length()-1; i++) {
+        for (int i = 0; i < textFile.length()-1; i++) { //kører i textfilens længde
 
             StringBuilder buildRule = new StringBuilder();
 
             char current = textFile.charAt(i);
 
-          /*  if (textFile.charAt(i + 1) == ':') {
-                System.out.println("LOL");
-            }  */
-
             if (current == ':') {
-                currentLetter = textFile.charAt(i - 1);
+                currentLetter = textFile.charAt(i - 1); //her tilføjes char til venstre for ':' til currentLetter (=ruleLetter)
             }
 
-            if (current == ',') {
+            if (current == ',') { //hver gang current er ',' starter sendRules metoden, og buildRule nulstilles
                 sendRules();
                 buildRule.setLength(0);
             }
 
 
-           // else if (current != ':' && current != ',') { // ellers, hvis current ikke er , eller " så skal den appendes til buildRule, der er en stringbuilder
-
-             if (textFile.charAt(i+1) != ':' && current != ':' && current != ',') {
-
-                buildRule.append(current);
-                currRule += String.valueOf(buildRule); //currRule får buildRules string
-
+             if (textFile.charAt(i+1) != ':' && Character.isLetter(current)) {//hvis current ikke er til venstre for ':' OG current er et bogstav:
+                buildRule.append(current); //current appendes til buildRule der er en stringBuilder
+                currRule += String.valueOf(buildRule); //currRule får buildRules string //currRule får strengen fra buildRule
             }
 
-            else if (current == '.') {
+            else if (current == '.') { // '.' stopper metoden
                 return;
             }
 
             }
     }
 
-    private void sendRules() {
+    private void sendRules() { //reglerne sendes. det er også her de skal gemmes
         System.out.println("the rule-letter is " + currentLetter);
         System.out.println("the rule is " + currRule);
-        currRule = "";
+        currRule = ""; //currRule nulstilles
     }
 }
-
-
-
- /*
-        Det her virker ikke. dvs den gemmer ikke reglen. Vi havde svært ved at få det til at virke, da RULE-klassen
-        er lidt rodet/ikke virker.
-
-        Rule rule = new Rule(currentLetter, currRule);
-        ruleset.add(rule);
-
-        */
-
-
 
 
 

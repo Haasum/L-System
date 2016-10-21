@@ -50,9 +50,9 @@ public class txt {
 
     }
 
-        public String getTxtFile() {
-            return this.inputFromTxt; //når input fra textFil skal virke
-            // return "A:ABA,B:BCB,C:ACA,"; // til test
+        public String getTxtFile() { //her laves tekstfilen om til en string, der kan tilgås fra andre klasser
+           // return this.inputFromTxt; // når input fra textFil skal virke
+            return "A:ABA,B:BCB,C:ACA,"; // til test
         }
 
 

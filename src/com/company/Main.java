@@ -13,7 +13,7 @@ public class Main extends JPanel {
         String txtFile = test.getTxtFile();
         //System.out.println("text file is " + txtFile);
 
-        new Grammatik(txtFile); //21. okt: denne kan udkommenteres, og så kører programmet.
+        new Grammatik(txtFile);
 
         new LsysGUI.GUI();
 
