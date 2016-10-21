@@ -7,6 +7,7 @@ public class Grammatik {
     ArrayList<Rule> ruleset;
     char currentLetter;
     String textFile;
+    String currRule = "";
 
     public Grammatik(String textFile) {
         System.out.println("Grammatik is ON");
@@ -19,18 +20,44 @@ public class Grammatik {
 
     public void saveRules() {
         for (int i = 1; i < textFile.length(); i++) {
-            String currRule = "";
+
+            StringBuilder buildRule = new StringBuilder();
 
             char current = textFile.charAt(i);
             if (current == ':') {
                 currentLetter = textFile.charAt(i - 1);
+            }
+            if (current == ',') {
+                break;
+            }
+            else {
+                buildRule.append(current);
+                //Character.toString(current);
+                //currRule += current;
+                currRule += String.valueOf(buildRule);
 
-                for (int j = i + 1; j < textFile.length() - i; j++) {
+
+            }
+
+            }
+
+        System.out.println("the current rule is " + currRule);
+
+
+
+
+         /*   for (int j = i + 1; j < textFile.length() - i; j++) {
                     char currPartRule = textFile.charAt(j);
                     if (currPartRule == ',') {
                         break;
                     }
-                    currRule += currPartRule;
+                    else {
+                        Character.toString(textFile.charAt(j));
+                        System.out.println(textFile.charAt(i - 1));
+
+                    } */
+
+                  //  currRule += currPartRule;
 
                 }
             }
@@ -39,19 +66,19 @@ public class Grammatik {
           // Rule rule = new Rule(currentLetter, currRule);
           // ruleset.add(rule);
 
-            System.out.println("regelbogstav er: " + currentLetter + " Reglen er: " + currRule);
+          //  System.out.println("regelbogstav er: " + currentLetter + " Reglen er: " + currRule);
            // String testRegel = currentLetter + currRule;
            // System.out.println("test reglen er " + testRegel);
 
 
 
-        }
+        //}
 
-        System.out.println("jeg er gemt");
+   //     System.out.println("jeg er gemt");
 
-    }
+ //   }
 
-}
+//}
 
 
 
