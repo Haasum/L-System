@@ -28,23 +28,42 @@ public class Grammatik {
                 currentLetter = textFile.charAt(i - 1);
             }
             if (current == ',') {
+                sendRules();
+            }
+
+            if (current == '.') {
                 break;
             }
-            else {
+            else if (current != ':') { // ellers, hvis current ikke er , eller " så skal den appendes til buildRule, der er en stringbuilder
+
                 buildRule.append(current);
-                //Character.toString(current);
-                //currRule += current;
-                currRule += String.valueOf(buildRule);
+                currRule += String.valueOf(buildRule); //currRule får buildRules string
 
 
             }
 
+
+
             }
 
-        System.out.println("the current rule is " + currRule);
 
 
 
+
+        /*
+        Det her virker ikke. dvs den gemmer ikke reglen. Vi havde svært ved at få det til at virke, da RULE-klassen
+        er lidt rodet/ikke virker.
+
+        Rule rule = new Rule(currentLetter, currRule);
+        ruleset.add(rule);
+
+        */
+
+
+
+
+
+        //det næste er fra den gamle grammatik klasse. sletter når vi alle sammen er her.
 
          /*   for (int j = i + 1; j < textFile.length() - i; j++) {
                     char currPartRule = textFile.charAt(j);
@@ -60,7 +79,13 @@ public class Grammatik {
                   //  currRule += currPartRule;
 
                 }
-            }
+
+    private void sendRules() {
+        System.out.println("the rule-letter is " + currentLetter);
+        System.out.println("the rule is " + currRule);
+        currRule = "";
+    }
+}
 
 //det er her den fucker med os
           // Rule rule = new Rule(currentLetter, currRule);
