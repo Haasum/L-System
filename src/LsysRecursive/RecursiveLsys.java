@@ -11,32 +11,47 @@ public class RecursiveLsys {
 
     Grammatik grammatik;
     char Axiom; // TODO tjek Johns eksempler; Axiom som String?
+    String treeSys;
+    int genNo = 0;
 
     public RecursiveLsys(Grammatik grammatik){
-
         this.grammatik = grammatik;
         setAxiom();
-        makeString();
     }
-
-    private void setAxiom() {
-
+    public void setAxiom() {
         Axiom = grammatik.getAxiom();
-
+        treeSys = ""+Axiom;
+        makeString(treeSys);
     }
 
-    public void makeString(){
-
+    public void makeString(String currentString){
+        System.out.println(currentString);
         String nextGen = "";
 
-        for(int i = 0; i < grammatik.getRuleset().size(); i++){
-            char current = grammatik.getRuleset().get(i).getAlfabet();
-            if (current == Axiom){
-                nextGen += grammatik.getRuleset().get(i).getRegel();
+        for ( int i = 0; i < currentString.length(); i++) {
+            if (genNo > 6){
+                break;
             }
-            System.out.println(current);
-        }
+            char currentLetterinGen = currentString.charAt(i);
 
+
+            for (int j = 0; j < grammatik.getRuleset().size(); j++) {
+                char currentLetterInRuleset = grammatik.getRuleset().get(j).getAlfabet();
+
+                if (currentLetterinGen == currentLetterInRuleset) {
+                    nextGen += grammatik.getRuleset().get(j).getRegel();
+                    treeSys += nextGen;
+                }
+                /*else {
+                    treeSys += currentLetterinGen;
+                }*/
+                genNo ++;
+                makeString(treeSys);
+                System.out.println("Vi kalder MakeString igen med: "+nextGen);
+                System.out.println("GenN0: "+genNo+"TreeSys er: " + treeSys);
+
+            }
+        }
     }
 }
 
