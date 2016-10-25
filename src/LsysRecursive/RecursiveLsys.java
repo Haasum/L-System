@@ -26,12 +26,19 @@ public class RecursiveLsys {
     public void setAxiom() {
         Axiom = grammatik.getAxiom();
         treeSys = ""+Axiom;
-        makeString(treeSys);
     }
 
-    public void makeString(String currentString){
+    public void setRuleset(){
+        ruleset = grammatik.ruleset;
+    }
+
+
+}
+
+   /* public String makeString(String currentString){
         System.out.println("Det her er currentstring" + currentString);
         String nextGen = "";
+        String ruleToParse = "";
 
         for ( int i = 0; i < currentString.length(); i++) {
             char currentLetterinGen = currentString.charAt(i);
@@ -39,27 +46,25 @@ public class RecursiveLsys {
             for (int j = 0; j < ruleset.size(); j++) {
                 char currentLetterInRuleset =ruleset.get(j).getAlfabet();
 
-                if (currentLetterinGen == currentLetterInRuleset) {
-                    nextGen += ruleset.get(j).getRegel();
+                if (currentLetterinGen == currentLetterInRuleset && genNo < 5) {
+                    ruleToParse += ruleset.get(j).getRegel();
+                    nextGen += makeString(ruleToParse);
+                    genNo++;
                     treeSys += nextGen;
                     System.out.println("Jeg er rigtig: sammenligning er mellem: "+ i + currentLetterinGen + j + currentLetterInRuleset);
                 }
                 /*else {
                     treeSys += currentLetterinGen;
-                }*/
-                genNo ++;
+                }
                 if (genNo > 5 ) {break;}
-                makeString(nextGen);
                 System.out.println("Vi kalder MakeString igen med: "+nextGen);
                 System.out.println("GenN0: "+genNo+"TreeSys er: " + treeSys);
-
+                System.out.println(" ");
             }
         }
-    }
-    public void setRuleset(){
-        ruleset = grammatik.ruleset;
-    }
-}
+        return nextGen;
+    }*/
+
 
     /*Grammatik gram;
 
