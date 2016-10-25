@@ -1,5 +1,7 @@
 package LsysRecursive;
 
+import java.util.ArrayList;
+
 /**s
  * Denne klasse har metoden generateLsys. Ideen med denne: Den skal have en streng som parameter og gennemløbe den.
  * For hver gang den finder et bogstav fra Grammatik, skal den lave et rekursivt kald parametermed bogstavets
@@ -8,7 +10,7 @@ package LsysRecursive;
  * Spørgsmål til John: Hvordan gemmes hver streng bedst?
  */
 public class RecursiveLsys {
-
+    ArrayList<Rule> ruleset;
     Grammatik grammatik;
     char Axiom; // TODO tjek Johns eksempler; Axiom som String?
     String treeSys;
@@ -16,7 +18,10 @@ public class RecursiveLsys {
 
     public RecursiveLsys(Grammatik grammatik){
         this.grammatik = grammatik;
+
+        setRuleset();
         setAxiom();
+
     }
     public void setAxiom() {
         Axiom = grammatik.getAxiom();
@@ -25,33 +30,34 @@ public class RecursiveLsys {
     }
 
     public void makeString(String currentString){
-        System.out.println(currentString);
+        System.out.println("Det her er currentstring" + currentString);
         String nextGen = "";
 
         for ( int i = 0; i < currentString.length(); i++) {
-            if (genNo > 6){
-                break;
-            }
             char currentLetterinGen = currentString.charAt(i);
 
-
-            for (int j = 0; j < grammatik.getRuleset().size(); j++) {
-                char currentLetterInRuleset = grammatik.getRuleset().get(j).getAlfabet();
+            for (int j = 0; j < ruleset.size(); j++) {
+                char currentLetterInRuleset =ruleset.get(j).getAlfabet();
 
                 if (currentLetterinGen == currentLetterInRuleset) {
-                    nextGen += grammatik.getRuleset().get(j).getRegel();
+                    nextGen += ruleset.get(j).getRegel();
                     treeSys += nextGen;
+                    System.out.println("Jeg er rigtig: sammenligning er mellem: "+ i + currentLetterinGen + j + currentLetterInRuleset);
                 }
                 /*else {
                     treeSys += currentLetterinGen;
                 }*/
                 genNo ++;
-                makeString(treeSys);
+                if (genNo > 5 ) {break;}
+                makeString(nextGen);
                 System.out.println("Vi kalder MakeString igen med: "+nextGen);
                 System.out.println("GenN0: "+genNo+"TreeSys er: " + treeSys);
 
             }
         }
+    }
+    public void setRuleset(){
+        ruleset = grammatik.ruleset;
     }
 }
 
@@ -64,14 +70,9 @@ public class RecursiveLsys {
     public String generateLsys(int genNo, String genString) {
         String next = "";
         if (genNo > 0) {
-
-
             char[] charInString = genString.toCharArray();
-
             for (char c : charInString) {
-
-                /*switch (c) {
-
+                switch (c) {
                     case 'B':
                         next += generateLsys(genNo-1, "BAA");
                         break;
@@ -84,14 +85,10 @@ public class RecursiveLsys {
                 }
             }
         }
-
-
         else {
             next=genString;
         }
         System.out.println("i gen: "+ genNo+ " er reglen:  " + genString);
-
         return next;
-
     }
 }*/
