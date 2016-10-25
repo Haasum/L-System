@@ -21,6 +21,7 @@ public class RecursiveLsys {
 
         setRuleset();
         setAxiom();
+        makeTree("A");
 
     }
     public void setAxiom() {
@@ -32,6 +33,34 @@ public class RecursiveLsys {
         ruleset = grammatik.ruleset;
     }
 
+    public void makeTree(String genCheck){
+        String nextGen = "";
+        if (genNo > 5){
+            return;
+
+        } //TODO der skal laves cases for hver
+        for(int i = 0; i < genCheck.length(); i++){
+            char currentCheck = genCheck.charAt(i);
+            switch (currentCheck){
+                case 'A':
+                    nextGen += ruleset.get(0).getRegel();
+                    System.out.println("Test" + genNo + nextGen);
+                    break;
+                case 'B':
+                    nextGen += ruleset.get(1).getRegel();
+                    break;
+                case 'C':
+                    nextGen += ruleset.get(2).getRegel();
+                    break;
+                default:
+                    nextGen += currentCheck;
+            }
+
+        }
+        System.out.println(nextGen);
+        genNo++;
+        makeTree(nextGen);
+    }
 
 }
 
