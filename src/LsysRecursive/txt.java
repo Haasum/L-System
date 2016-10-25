@@ -11,9 +11,9 @@ public class txt {
     public String inputFromTxt;
 
     public txt() {
-        BufferedReader br = null;
+      /*  BufferedReader br = null;
         try {
-            br = new BufferedReader(new FileReader("C:\\Users\\nanna\\IdeaProjects\\Proto2\\Proto2\\src\\LsysRecursive\\testTxt.txt"));
+            br = new BufferedReader(new FileReader("C:\\Users\\naja\\IdeaProjects\\Proto2\\Proto2\\src\\LsysRecursive\\testTxt.txt"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -46,7 +46,7 @@ public class txt {
             }
             //TODO: Ryd op i klasserne når proto2 er færdig
 
-        }
+        } */
 
     }
 

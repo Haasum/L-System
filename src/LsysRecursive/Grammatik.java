@@ -11,7 +11,7 @@ public class Grammatik {
     Rule rule;
 
     public Grammatik(String textFile) {
-        System.out.println("Grammatik is ON");
+       // System.out.println("Grammatik is ON");
 
         this.textFile = textFile + '.';
         readRules();
@@ -51,12 +51,9 @@ public class Grammatik {
     }
 
     private void sendRules() { //reglerne sendes. det er også her de skal gemmes
-        System.out.println("the rule-letter is " + currentLetter);
-        System.out.println("the rule is " + currRule);
         rule = new Rule(currentLetter, currRule);
         ruleset.add(rule);
         currRule = ""; //currRule nulstilles
-        System.out.println(ruleset.size());
     }
 }
 

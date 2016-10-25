@@ -10,6 +10,7 @@ public class Rule {
     public Rule(char input, String regel){
         this.setAlfabet(input);
         this.setRegel(regel);
+        System.out.println("I rule klassen står: " + input + " og " + regel);
     }
 
     public char getAlfabet() {
