@@ -9,7 +9,15 @@ package LsysRecursive;
  */
 public class RecursiveLsys {
 
-    Grammatik gram;
+    Grammatik grammatik;
+
+    public RecursiveLsys(Grammatik grammatik){
+
+        this.grammatik = grammatik;
+    }
+}
+
+    /*Grammatik gram;
 
     public RecursiveLsys(Grammatik gram){
         this.gram = gram;
@@ -35,7 +43,7 @@ public class RecursiveLsys {
                     default:
                         next += c;
                         break;
-                }*/
+                }
             }
         }
 
@@ -48,4 +56,4 @@ public class RecursiveLsys {
         return next;
 
     }
-}
+}*/

@@ -33,7 +33,7 @@ public class Grammatik {
             }
 
             if (current == ',') { //hver gang current er ',' starter sendRules metoden, og buildRule nulstilles
-                sendRules();
+                addRule();
                 buildRule.setLength(0);
             }
 
@@ -50,10 +50,15 @@ public class Grammatik {
             }
     }
 
-    private void sendRules() { //reglerne sendes. det er også her de skal gemmes
+    private void addRule() { //reglerne sendes. det er også her de skal gemmes
         rule = new Rule(currentLetter, currRule);
         ruleset.add(rule);
         currRule = ""; //currRule nulstilles
+    }
+
+    public ArrayList<Rule> getRuleset(){
+
+        return ruleset;
     }
 }
 
