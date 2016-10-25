@@ -15,7 +15,7 @@ public class Main extends JPanel {
 
         new Grammatik(txtFile);
 
-        new LsysGUI.GUI();
+        //new LsysGUI.GUI(); - udkommenteret for testing purposes
 
 
     }

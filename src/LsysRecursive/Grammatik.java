@@ -14,7 +14,7 @@ public class Grammatik {
 
         this.textFile = textFile + '.';
         readRules();
-        ruleset = new ArrayList<>();
+        ruleset = new ArrayList<Rule>();
 
     }
 
@@ -25,6 +25,8 @@ public class Grammatik {
             StringBuilder buildRule = new StringBuilder();
 
             char current = textFile.charAt(i);
+
+
 
             if (current == ':') {
                 currentLetter = textFile.charAt(i - 1); //her tilføjes char til venstre for ':' til currentLetter (=ruleLetter)
@@ -51,6 +53,10 @@ public class Grammatik {
     private void sendRules() { //reglerne sendes. det er også her de skal gemmes
         System.out.println("the rule-letter is " + currentLetter);
         System.out.println("the rule is " + currRule);
+        //Rule rule = new Rule(currentLetter, currRule);
+        ruleset.add(new Rule(currentLetter, currRule));
+        //ruleset.add(rule);
+        //System.out.println(ruleset.size());
         currRule = ""; //currRule nulstilles
     }
 }

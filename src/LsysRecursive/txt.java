@@ -13,7 +13,7 @@ public class txt {
     public txt() {
         BufferedReader br = null;
         try {
-            br = new BufferedReader(new FileReader("C:\\Users\\naja\\IdeaProjects\\GITHUB\\Proto2\\src\\LsysRecursive\\testTxt.txt"));
+            br = new BufferedReader(new FileReader("C:\\Users\\nanna\\IdeaProjects\\Proto2\\Proto2\\src\\LsysRecursive\\testTxt.txt"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -44,7 +44,7 @@ public class txt {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
+            //TODO: Ryd op i klasserne når proto2 er færdig
 
         }
 
