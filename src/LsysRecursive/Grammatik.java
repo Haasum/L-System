@@ -8,18 +8,18 @@ public class Grammatik {
     char currentLetter;
     String textFile;
     String currRule = "";
+    Rule rule;
 
     public Grammatik(String textFile) {
         System.out.println("Grammatik is ON");
 
         this.textFile = textFile + '.';
         readRules();
-        ruleset = new ArrayList<Rule>();
 
     }
 
     public void readRules() { //læser reglerne og deler dem op i i rule-letter og rule
-
+        ruleset = new ArrayList<>();
         for (int i = 0; i < textFile.length()-1; i++) { //kører i textfilens længde
 
             StringBuilder buildRule = new StringBuilder();
@@ -53,11 +53,10 @@ public class Grammatik {
     private void sendRules() { //reglerne sendes. det er også her de skal gemmes
         System.out.println("the rule-letter is " + currentLetter);
         System.out.println("the rule is " + currRule);
-        //Rule rule = new Rule(currentLetter, currRule);
-        ruleset.add(new Rule(currentLetter, currRule));
-        //ruleset.add(rule);
-        //System.out.println(ruleset.size());
+        rule = new Rule(currentLetter, currRule);
+        ruleset.add(rule);
         currRule = ""; //currRule nulstilles
+        System.out.println(ruleset.size());
     }
 }
 
