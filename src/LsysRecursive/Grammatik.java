@@ -9,6 +9,7 @@ public class Grammatik {
     String textFile;
     String currRule = "";
     Rule rule;
+    char axiom = 'A';
 
     public Grammatik(String textFile) {
        // System.out.println("Grammatik is ON");
@@ -57,46 +58,13 @@ public class Grammatik {
     }
 
     public ArrayList<Rule> getRuleset(){
-
         return ruleset;
     }
+
+    public char getAxiom() {
+        return axiom;
+    }
 }
-
-
-
-//det næste er fra den gamle grammatik klasse. sletter når vi alle sammen er her.
-
-         /*   for (int j = i + 1; j < textFile.length() - i; j++) {
-                    char currPartRule = textFile.charAt(j);
-                    if (currPartRule == ',') {
-                        break;
-                    }
-                    else {
-                        Character.toString(textFile.charAt(j));
-                        System.out.println(textFile.charAt(i - 1));
-
-                    } */
-
-//  currRule += currPartRule;
-
-
-//det er her den fucker med os
-          // Rule rule = new Rule(currentLetter, currRule);
-          // ruleset.add(rule);
-
-          //  System.out.println("regelbogstav er: " + currentLetter + " Reglen er: " + currRule);
-           // String testRegel = currentLetter + currRule;
-           // System.out.println("test reglen er " + testRegel);
-
-
-
-        //}
-
-   //     System.out.println("jeg er gemt");
-
- //   }
-
-//}
 
 
 

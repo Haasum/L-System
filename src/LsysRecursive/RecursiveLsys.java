@@ -10,10 +10,33 @@ package LsysRecursive;
 public class RecursiveLsys {
 
     Grammatik grammatik;
+    char Axiom; // TODO tjek Johns eksempler; Axiom som String?
 
     public RecursiveLsys(Grammatik grammatik){
 
         this.grammatik = grammatik;
+        setAxiom();
+        makeString();
+    }
+
+    private void setAxiom() {
+
+        Axiom = grammatik.getAxiom();
+
+    }
+
+    public void makeString(){
+
+        String nextGen = "";
+
+        for(int i = 0; i < grammatik.getRuleset().size(); i++){
+            char current = grammatik.getRuleset().get(i).getAlfabet();
+            if (current == Axiom){
+                nextGen += grammatik.getRuleset().get(i).getRegel();
+            }
+            System.out.println(current);
+        }
+
     }
 }
 
