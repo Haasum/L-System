@@ -20,7 +20,7 @@ public class Controller {
         Grammatik grammatik = new Grammatik(txtFile);
         RecursiveLsys lsys = new RecursiveLsys(grammatik);
 
-        new LsysGUI.GUI();
+        //new LsysGUI.GUI();
 
 
     }
