@@ -1,5 +1,6 @@
 package com.company;
 
+import LsysGUI.Turtle;
 import LsysRecursive.Grammatik;
 import LsysRecursive.RecursiveLsys;
 import LsysRecursive.txt;
@@ -20,6 +21,7 @@ public class Controller {
         RecursiveLsys lsys = new RecursiveLsys(grammatik);
 
         //new LsysGUI.GUI(); - udkommenteret for testing purposes
+        Turtle turtle = new Turtle(grammatik, lsys);
 
     }
 

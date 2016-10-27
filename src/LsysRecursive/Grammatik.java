@@ -64,7 +64,51 @@ public class Grammatik {
     public char getAxiom() {
         return axiom;
     }
+
+    public void getGrow(char charCheck) { //TODO Skal det tilføjes til ruleset arraylist?
+
+        int grow;
+
+        if (charCheck == 'A') {
+            grow = 5;
+        }
+
+        if (charCheck == 'B') {
+            grow = 8;
+        }
+        if (charCheck == 'C') {
+            grow = 11;
+        }
+    }
+
+    public int setGrow(int grow){
+
+        return grow;
 }
+
+    public void getTurn(char charCheck){
+
+        double turn;
+
+        if(charCheck == 'A') {
+            turn = 0.1;
+        }
+
+        if(charCheck == 'B'){
+            turn = 0.2;
+        }
+
+        if(charCheck == 'C'){
+            turn = 0.3;
+        }
+    }
+
+    public double setTurn(double turn){
+
+        return turn;
+    }
+}
+
 
 
 
