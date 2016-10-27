@@ -74,12 +74,14 @@ public class Turtle extends JPanel {
                 {
                     g2d.setColor(Color.black);
                     g2d.draw( line );
+                    //g2d.translate(0.0,-200.0);
+                    g2d.translate(0,pushIt);
 
                 }
-                for (Translate translate : translates)
+               /* for (Translate translate : translates)
                 {
-                    g2d.translate(translate);
-                }
+                   g2d.translate(0.0,-200.0);
+                } */
                 g2d.dispose();
 
             }
@@ -111,8 +113,10 @@ public class Turtle extends JPanel {
                     System.out.println("A");
                     branchHeight = 500;
                     startX = 300;
+                    lines.add(new Line2D.Double(startX, startY, startX, branchHeight));
                     break;
                 case '+':
+                    pushIt = -200;
                     System.out.println("+");
                     break;
                 case '-':
@@ -129,8 +133,7 @@ public class Turtle extends JPanel {
                     System.out.println("Char not in alphabet");
                     break;
             }
-            lines.add(new Line2D.Double(startX, startY, startX, branchHeight));
-            translates.add(new Translate(0.0,-200.0));
+
 
 
             //List<Translate2D> translates = new ArrayList<>();
