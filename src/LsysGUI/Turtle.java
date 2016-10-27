@@ -2,6 +2,8 @@ package LsysGUI;
 
 import LsysRecursive.Grammatik;
 import LsysRecursive.RecursiveLsys;
+import com.sun.javafx.geom.transform.Translate2D;
+import javafx.scene.transform.Translate;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,10 +28,13 @@ public class Turtle extends JPanel {
     int branchHeight;
     int startY = 600;
     int startX;
+    int rotationen;
+    int pushIt;
 
     boolean startDraw;
     List<Shape> shapes = new ArrayList<>(); //TEST
     List<Line2D> lines = new ArrayList<>();
+    List<Translate> translates = new ArrayList<>();
 
     String drawThis = "A[+A][-A]"; //test string
 
@@ -55,7 +60,7 @@ public class Turtle extends JPanel {
                 Graphics2D g2d = (Graphics2D)g.create();
 
                 g2d.setColor(Color.red);
-                g2d.rotate(Math.toRadians(5));
+                g2d.rotate(Math.toRadians(rotationen));
 
 
                 for (Shape shape: shapes)
@@ -70,6 +75,10 @@ public class Turtle extends JPanel {
                     g2d.setColor(Color.black);
                     g2d.draw( line );
 
+                }
+                for (Translate translate : translates)
+                {
+                    g2d.translate(translate);
                 }
                 g2d.dispose();
 
@@ -111,6 +120,7 @@ public class Turtle extends JPanel {
                     break;
                 case '[':
                     System.out.println("[");
+
                     break;
                 case ']':
                     System.out.println("]");
@@ -119,8 +129,11 @@ public class Turtle extends JPanel {
                     System.out.println("Char not in alphabet");
                     break;
             }
-
             lines.add(new Line2D.Double(startX, startY, startX, branchHeight));
+            translates.add(new Translate(0.0,-200.0));
+
+
+            //List<Translate2D> translates = new ArrayList<>();
 
        /* for(int i = 0; i < 10; i++) {
 
