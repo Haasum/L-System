@@ -20,8 +20,8 @@ public class Controller {
         Grammatik grammatik = new Grammatik(txtFile);
         RecursiveLsys lsys = new RecursiveLsys(grammatik);
 
-        //new LsysGUI.GUI(); - udkommenteret for testing purposes
-        Turtle turtle = new Turtle(grammatik, lsys);
+        new LsysGUI.GUI();
+
 
     }
 

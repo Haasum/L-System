@@ -10,7 +10,7 @@ public class Grammatik {
     String currRule = "";
     Rule rule;
     char axiom = 'A';
-    int grow;
+    int grow =0;
     double turn;
 
     public Grammatik(String textFile) {
