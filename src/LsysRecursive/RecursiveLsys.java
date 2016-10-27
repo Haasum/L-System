@@ -1,5 +1,7 @@
 package LsysRecursive;
 
+import com.sun.org.apache.xml.internal.resolver.readers.TR9401CatalogReader;
+
 import java.util.ArrayList;
 
 /**s
@@ -15,115 +17,66 @@ public class RecursiveLsys {
     char Axiom; // TODO tjek Johns eksempler; Axiom som String?
     String treeSys;
     int genNo = 0;
+    char axiom1 = '+';
+    char LetterA = 'A';
+    String ruleA = "[+A]";
+    String treeLsys1 = "";
+    int genNo1 = 0;
 
-    public RecursiveLsys(Grammatik grammatik){
+    public RecursiveLsys(Grammatik grammatik) {
         this.grammatik = grammatik;
-
-        setRuleset();
-        setAxiom();
-        makeTree("A");
-
-    }
-    public void setAxiom() {
-        Axiom = grammatik.getAxiom();
-        treeSys = ""+Axiom;
+        this.ruleset = grammatik.ruleset;
+        treeLsys1 += axiom1;
+        expand(treeLsys1, genNo1);
     }
 
-    public void setRuleset(){
-        ruleset = grammatik.ruleset;
-    }
-
-    public void makeTree(String genCheck){
-        String nextGen = "";
-        if (genNo > 5){
-            return;
-
-        } //TODO der skal laves cases for hver
-        for(int i = 0; i < genCheck.length(); i++){
-            char currentCheck = genCheck.charAt(i);
-            switch (currentCheck){
-                case 'A':
-                    nextGen += ruleset.get(0).getRegel();
-                    //System.out.println("Test" + genNo + nextGen);
-                    break;
-                case 'B':
-                    nextGen += ruleset.get(1).getRegel();
-                    break;
-                case 'C':
-                    nextGen += ruleset.get(2).getRegel();
-                    break;
-                default:
-                    nextGen += currentCheck;
-            }
-
-        }
-        //System.out.println(nextGen);
-        genNo++;
-        makeTree(nextGen);
-    }
-
-
-}
-
-   /* public String makeString(String currentString){
-        System.out.println("Det her er currentstring" + currentString);
-        String nextGen = "";
-        String ruleToParse = "";
-
-        for ( int i = 0; i < currentString.length(); i++) {
-            char currentLetterinGen = currentString.charAt(i);
-
-            for (int j = 0; j < ruleset.size(); j++) {
-                char currentLetterInRuleset =ruleset.get(j).getAlfabet();
-
-                if (currentLetterinGen == currentLetterInRuleset && genNo < 5) {
-                    ruleToParse += ruleset.get(j).getRegel();
-                    nextGen += makeString(ruleToParse);
-                    genNo++;
-                    treeSys += nextGen;
-                    System.out.println("Jeg er rigtig: sammenligning er mellem: "+ i + currentLetterinGen + j + currentLetterInRuleset);
-                }
-                /*else {
-                    treeSys += currentLetterinGen;
-                }
-                if (genNo > 5 ) {break;}
-                System.out.println("Vi kalder MakeString igen med: "+nextGen);
-                System.out.println("GenN0: "+genNo+"TreeSys er: " + treeSys);
-                System.out.println(" ");
-            }
-        }
-        return nextGen;
-    }*/
-
-
-    /*Grammatik gram;
-
-    public RecursiveLsys(Grammatik gram){
-        this.gram = gram;
-    }
-
-    public String generateLsys(int genNo, String genString) {
+    public String expand(String s, int genNo1) {
         String next = "";
-        if (genNo > 0) {
-            char[] charInString = genString.toCharArray();
-            for (char c : charInString) {
-                switch (c) {
-                    case 'B':
-                        next += generateLsys(genNo-1, "BAA");
-                        break;
-                    case 'A':
-                        next += generateLsys(genNo-1, "B[+A]");
-                        break;
-                    default:
-                        next += c;
-                        break;
+        if (genNo1 > 1) {
+            System.out.println("done");
+            return s;
+        }
+
+        for (int i = 0; i < s.length(); i++) {
+            char curr = s.charAt(i);
+            String expandRule = checkLetterInAlpha(curr);
+            if (expandRule != null) {
+                next += LetterA + expand(expandRule, genNo1 + 1);
+            }
+            else {
+                next += curr;
+                break;
+            }
+            /*for (int j = 0; j < ruleset.size(); j++) {
+                char alphaCurr = ruleset.get(j).getAlfabet();
+                if (curr == alphaCurr) {
+                    next += LetterA + expand(ruleset.get(j).getRegel(), genNo1 + 1);
+                    //next += LetterA + expand(ruleA, genNo1+1);
+                    break;
+                } else {
+                    next += curr;
+                    break;
                 }
             }
+*/
         }
-        else {
-            next=genString;
-        }
-        System.out.println("i gen: "+ genNo+ " er reglen:  " + genString);
+        System.out.println("generation: " + genNo1 + "current alphabet " + next);
         return next;
     }
-}*/
+    public String checkLetterInAlpha(char c) {
+        String k = "";
+        for (int i = 0; i < ruleset.size(); i++) {
+            char currAlpha = ruleset.get(i).getAlfabet();
+            if (currAlpha == c) {
+                k = ruleset.get(i).getRegel();
+            }
+        }
+        return k;
+
+    }
+
+    public void setAxiom() {
+        Axiom = grammatik.getAxiom();
+        treeSys = "" + Axiom;
+    }
+}
