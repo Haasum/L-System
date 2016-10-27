@@ -6,6 +6,7 @@ import LsysRecursive.RecursiveLsys;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Line2D;
 import java.util.*;
 import java.util.List;
 
@@ -21,8 +22,16 @@ public class Turtle extends JPanel {
     JPanel testPanel;
     Graphics g;
     int lang;
+    int start2;
+    int branchHeight;
+    int startY = 600;
+    int startX;
+
     boolean startDraw;
     List<Shape> shapes = new ArrayList<>(); //TEST
+    List<Line2D> lines = new ArrayList<>();
+
+    String drawThis = "A[+B][-A]"; //test string
 
 
     public Turtle(Grammatik grammatik, RecursiveLsys lsys) {
@@ -46,20 +55,24 @@ public class Turtle extends JPanel {
 
                 Graphics2D g2d = (Graphics2D)g.create();
 
+                g2d.setColor(Color.red);
+
+
                 for (Shape shape: shapes)
                 {
                     g2d.setColor( Color.RED );
-                    g2d.fill( shape );
+                    //g2d.fill( shape );
+                }
+
+
+                for (Line2D line : lines)
+                {
+                    g2d.setColor(Color.black);
+                    g2d.draw( line );
+
                 }
                 g2d.dispose();
 
-
-                if (startDraw = true) {
-                    g.setColor(Color.black);
-
-                    //g.drawLine(getWidth() / 2, getHeight(), getWidth() / 2, 55);
-                    //g.fillOval(10,10, 15, 15);
-                }
             }
         };
         //JPanel testPanel = new JPanel();
@@ -76,18 +89,44 @@ public class Turtle extends JPanel {
     public void drawTurtle() {
         System.out.println("turtle draw");
 
-        for(int i = 0; i < 10; i++) {
-            System.out.println("Loopet kører");
-            lang += 50;
+        for (int i = 0; i < drawThis.length(); i++) {
+            char currentCheck = drawThis.charAt(i);
+
+           /* if (Character.isLetter(currentCheck)) {
+                    branchHeight = 500;
+                    System.out.println(growIs);
+            } */
+
+            if (currentCheck == 'A') {
+                branchHeight = 500;
+                startX = 300;
+
+            }
+            if (currentCheck == 'B') {
+                branchHeight = 100;
+                startX = 100;
+
+            }
+
+            lines.add(new Line2D.Double(startX, startY, startX, branchHeight));
+
+
+
+
+       /* for(int i = 0; i < 10; i++) {
+
+
+            lang += 5;
+            start2 += 10;
             shapes.add( new Ellipse2D.Double(lang, 50, 50, 50) ); //TEST
 
-        }
+            lines.add( new Line2D.Double(start2,lang,50,50));
 
-          //  super.paintComponent(g);
-          //  g.drawLine(getWidth() / 2, getHeight(), getWidth() / 2, 10);
-          //  paint();
+        } */
 
         }
+
+    }
 
 
 
@@ -100,6 +139,7 @@ public class Turtle extends JPanel {
     public void setGrowIs() {
         growIs = grammatik.getGrow(c);
     }
+
 
     public void setTurnIs() {
         turnIs = grammatik.getTurn(c);
