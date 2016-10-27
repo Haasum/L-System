@@ -81,17 +81,8 @@ public class Grammatik {
             grow = 11;
         }
         return grow;
-
     }
-
-    public int setGrow(int grow){
-
-        return grow;
-}
-
-    public void getTurn(char charCheck){
-
-        double turn;
+    public double getTurn(char charCheck){
 
         if(charCheck == 'A') {
             turn = 0.1;
@@ -104,13 +95,9 @@ public class Grammatik {
         if(charCheck == 'C'){
             turn = 0.3;
         }
-    }
-
-    public double setTurn(double turn){
 
         return turn;
     }
-
 }
 
 
