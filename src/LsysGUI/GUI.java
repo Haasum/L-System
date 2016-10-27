@@ -24,7 +24,6 @@ public class GUI extends JPanel {
         mainFrame.add(backgroundPanel);
         backgroundPanel.setBackground(heavenColor);
 
-        Turtle.drawTurtle();
 
     }
 

@@ -44,7 +44,7 @@ public class RecursiveLsys {
             switch (currentCheck){
                 case 'A':
                     nextGen += ruleset.get(0).getRegel();
-                    System.out.println("Test" + genNo + nextGen);
+                    //System.out.println("Test" + genNo + nextGen);
                     break;
                 case 'B':
                     nextGen += ruleset.get(1).getRegel();
@@ -57,10 +57,11 @@ public class RecursiveLsys {
             }
 
         }
-        System.out.println(nextGen);
+        //System.out.println(nextGen);
         genNo++;
         makeTree(nextGen);
     }
+
 
 }
 

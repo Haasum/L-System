@@ -10,6 +10,8 @@ public class Grammatik {
     String currRule = "";
     Rule rule;
     char axiom = 'A';
+    int grow;
+    double turn;
 
     public Grammatik(String textFile) {
        // System.out.println("Grammatik is ON");
@@ -65,9 +67,8 @@ public class Grammatik {
         return axiom;
     }
 
-    public void getGrow(char charCheck) { //TODO Skal det tilføjes til ruleset arraylist?
-
-        int grow;
+    //TODO Skal det tilføjes til ruleset arraylist?
+    public int getGrow(char charCheck) {
 
         if (charCheck == 'A') {
             grow = 5;
@@ -79,6 +80,8 @@ public class Grammatik {
         if (charCheck == 'C') {
             grow = 11;
         }
+        return grow;
+
     }
 
     public int setGrow(int grow){
@@ -107,6 +110,7 @@ public class Grammatik {
 
         return turn;
     }
+
 }
 
 
