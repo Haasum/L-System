@@ -5,6 +5,9 @@ import LsysRecursive.RecursiveLsys;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
+import java.util.*;
+import java.util.List;
 
 import static LsysGUI.GUI.mainPanel;
 
@@ -16,23 +19,47 @@ public class Turtle extends JPanel {
     char c = 'A';
     private double turnIs;
     JPanel testPanel;
+    Graphics g;
+    int lang;
+    boolean startDraw;
+    List<Shape> shapes = new ArrayList<>(); //TEST
+
 
     public Turtle(Grammatik grammatik, RecursiveLsys lsys) {
         this.grammatik = grammatik;
+        startDraw = false;
 
         makeTestPanel();
         drawTurtle();
-        repaint();
+
+
+
+
     }
 
     private void makeTestPanel() {
         JPanel testPanel = new JPanel(){
+
             public void paintComponent(Graphics g){
                 super.paintComponent(g);
+                System.out.println(lang);
 
-                g.setColor(Color.black);
-                g.drawOval(10,10,15,15);
-                g.fillOval(10,10, 15, 15);
+                Graphics2D g2d = (Graphics2D)g.create();
+
+                for (Shape shape: shapes)
+                {
+                    g2d.setColor( Color.RED );
+                    g2d.fill( shape );
+                }
+                g2d.dispose();
+
+
+                if (startDraw = true) {
+                    g.setColor(Color.black);
+
+                    //g.drawLine(getWidth() / 2, getHeight(), getWidth() / 2, 55);
+                    //g.fillOval(10,10, 15, 15);
+                }
             }
         };
         //JPanel testPanel = new JPanel();
@@ -49,8 +76,18 @@ public class Turtle extends JPanel {
     public void drawTurtle() {
         System.out.println("turtle draw");
 
+        for(int i = 0; i < 10; i++) {
+            System.out.println("Loopet kører");
+            lang += 50;
+            shapes.add( new Ellipse2D.Double(lang, 50, 50, 50) ); //TEST
 
-    }
+        }
+
+          //  super.paintComponent(g);
+          //  g.drawLine(getWidth() / 2, getHeight(), getWidth() / 2, 10);
+          //  paint();
+
+        }
 
 
 

@@ -21,7 +21,6 @@ Color heavenColor = new Color(99, 125, 150);
     public GUI() {
 
         Turtle turtle = new Turtle(grammatik, lsys);
-        System.out.println("GUI is on");
         //Color heavenColor = new Color(99, 125, 150);
 
         setTitle("Growing Tree");
