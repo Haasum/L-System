@@ -78,6 +78,8 @@ public class Turtle extends JPanel {
                     g2d.translate(0,pushIt);
 
                 }
+
+                //g2d.translate(0,pushIt);
                /* for (Translate translate : translates)
                 {
                    g2d.translate(0.0,-200.0);
@@ -116,7 +118,7 @@ public class Turtle extends JPanel {
                     lines.add(new Line2D.Double(startX, startY, startX, branchHeight));
                     break;
                 case '+':
-                    pushIt = -200;
+
                     System.out.println("+");
                     break;
                 case '-':
@@ -124,9 +126,10 @@ public class Turtle extends JPanel {
                     break;
                 case '[':
                     System.out.println("[");
-
+                    pushIt = -200;
                     break;
                 case ']':
+                    //pushIt = +100;
                     System.out.println("]");
                     break;
                 default:
