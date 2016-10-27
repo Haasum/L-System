@@ -16,7 +16,7 @@ import static LsysGUI.GUI.mainPanel;
 public class Turtle extends JPanel {
 
     Grammatik grammatik;
-    int growIs = 0;
+    int growIs;
     char c = 'A';
     private double turnIs;
     JPanel testPanel;
@@ -31,13 +31,13 @@ public class Turtle extends JPanel {
     List<Shape> shapes = new ArrayList<>(); //TEST
     List<Line2D> lines = new ArrayList<>();
 
-    String drawThis = "A[+B][-A]"; //test string
+    String drawThis = "A[+A][-A]"; //test string
 
 
     public Turtle(Grammatik grammatik, RecursiveLsys lsys) {
         this.grammatik = grammatik;
         startDraw = false;
-
+        System.out.println(growIs);
         makeTestPanel();
         drawTurtle();
 
@@ -51,11 +51,11 @@ public class Turtle extends JPanel {
 
             public void paintComponent(Graphics g){
                 super.paintComponent(g);
-                System.out.println(lang);
 
                 Graphics2D g2d = (Graphics2D)g.create();
 
                 g2d.setColor(Color.red);
+                g2d.rotate(Math.toRadians(5));
 
 
                 for (Shape shape: shapes)
@@ -87,31 +87,40 @@ public class Turtle extends JPanel {
 
 
     public void drawTurtle() {
-        System.out.println("turtle draw");
 
         for (int i = 0; i < drawThis.length(); i++) {
             char currentCheck = drawThis.charAt(i);
 
+            //DEN RIGTIGE:
            /* if (Character.isLetter(currentCheck)) {
                     branchHeight = 500;
                     System.out.println(growIs);
-            } */
+            } */ //TODO: det skal være med denne det skal kører
 
-            if (currentCheck == 'A') {
-                branchHeight = 500;
-                startX = 300;
-
-            }
-            if (currentCheck == 'B') {
-                branchHeight = 100;
-                startX = 100;
-
+            switch (currentCheck) {
+                case 'A':
+                    System.out.println("A");
+                    branchHeight = 500;
+                    startX = 300;
+                    break;
+                case '+':
+                    System.out.println("+");
+                    break;
+                case '-':
+                    System.out.println("-");
+                    break;
+                case '[':
+                    System.out.println("[");
+                    break;
+                case ']':
+                    System.out.println("]");
+                    break;
+                default:
+                    System.out.println("Char not in alphabet");
+                    break;
             }
 
             lines.add(new Line2D.Double(startX, startY, startX, branchHeight));
-
-
-
 
        /* for(int i = 0; i < 10; i++) {
 
@@ -125,21 +134,17 @@ public class Turtle extends JPanel {
         } */
 
         }
-
     }
-
-
 
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(10 + 10, 20 + 20);
     }
 
-
-    public void setGrowIs() {
+ /*   public void setGrowIs() {
         growIs = grammatik.getGrow(c);
-    }
-
+    } */
+ //TODO: growIs skal hentes fra gramatik klassens alfabet.
 
     public void setTurnIs() {
         turnIs = grammatik.getTurn(c);
