@@ -1,7 +1,7 @@
 package LsysRecursive;
 
 /**
- * Created by Lucas on 14-10-2016.
+ * Her skal vores regler læses fra grammatik klassen, og gemmes til senere.
  */
 public class Rule {
     private char alfabet;

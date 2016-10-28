@@ -1,3 +1,8 @@
+/**
+ * Gammatik står for at parse hvad der står i tekstfilen som kommer fra txt.java
+ * vores readRules method læser bogstavet inden vores kolon og reglener efter kolon som kan læses senere.
+ */
+
 package LsysRecursive;
 import java.util.ArrayList;
 public class Grammatik {
