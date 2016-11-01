@@ -24,7 +24,7 @@ public class Turtle extends JPanel {
     int lang;
     int start2;
     int branchHeight;
-    int startY = getHeight();
+    int startY;
     int startX;
     int rotationen;
     int pushIt;
@@ -68,7 +68,7 @@ public class Turtle extends JPanel {
 
                 g2d.setColor(Color.BLACK);
 
-                //  g2d.setTransform(newMatrix);
+                //g2d.setTransform(newMatrix);
 
 
                 for (int i = 0; i < drawThis.length(); i++) {
@@ -108,9 +108,13 @@ public class Turtle extends JPanel {
             private void push(Graphics g2d, AffineTransform transform) {
                 System.out.println("[");
                 saveMatrix = transform;
+                System.out.println("savematrix is " +saveMatrix);
 
-                newMatrix = AffineTransform.getTranslateInstance(0,testHeight+5);
+                newMatrix = AffineTransform.getTranslateInstance(0,-50);
                 transform.setTransform(newMatrix);
+
+                System.out.println("newmatrix is" + newMatrix);
+
 
 
             }
@@ -131,10 +135,9 @@ public class Turtle extends JPanel {
 
             private void growBranch(Graphics g2d) {
                 System.out.println("A");
-                testHeight += 20;
-
-                g2d.drawLine(300, startY,300,testHeight+2);
-                repaint();
+                testHeight = 20;
+                startY = this.getY();
+                g2d.drawLine(300,0,300,testHeight+5);
             }
 
         };
