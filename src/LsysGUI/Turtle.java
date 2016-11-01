@@ -35,6 +35,7 @@ public class Turtle extends JPanel {
     boolean pop;
     int testHeight;
     int testY;
+    boolean push = false;
 
     boolean startDraw;
     List<Shape> shapes = new ArrayList<>(); //TEST
@@ -58,63 +59,82 @@ public class Turtle extends JPanel {
         JPanel testPanel = new JPanel() {
 
             public void paintComponent(Graphics g) {
-                g.setColor(Color.BLACK);
+
+
+
+                super.paintComponent(g);
+                Graphics2D g2d = (Graphics2D)g.create();
+
+
+                g2d.setColor(Color.BLACK);
+
+                //  g2d.setTransform(newMatrix);
+
 
                 for (int i = 0; i < drawThis.length(); i++) {
                     char currentCheck = drawThis.charAt(i);
 
                     //DEN RIGTIGE:
-                    if (Character.isLetter(currentCheck)) {
+                  /*  if (Character.isLetter(currentCheck)) {
                         branchHeight = 500;
                         System.out.println(growIs);
-                    }  //TODO: det skal være med denne det skal kører
+                    }  //TODO: det skal være med denne det skal kører */
 
                     switch (currentCheck) {
                         case 'A':
-                            growBranch(g);
+                            growBranch(g2d);
                             break;
                         case '+':
-                            rotateRight(g);
+                            rotateRight(g2d);
                             break;
                         case '-':
-                            rotateLeft(g);
+                            rotateLeft(g2d);
                             break;
                         case '[':
-                            push(g);
+                            push(g2d, g2d.getTransform());
                             break;
                         case ']':
-                            pop(g);
+                            pop(g2d);
                             break;
                         default:
                             System.out.println("Char not in alphabet");
                             break;
                     }
+
                 }
+
             }
 
-            private void push(Graphics g) {
+            private void push(Graphics g2d, AffineTransform transform) {
                 System.out.println("[");
+                saveMatrix = transform;
+
+                newMatrix = AffineTransform.getTranslateInstance(0,testHeight+5);
+                transform.setTransform(newMatrix);
+
+
             }
 
-            private void pop(Graphics g) {
+            private void pop(Graphics g2d) {
                 System.out.println("]");
             }
 
 
 
-            private void rotateLeft(Graphics g) {
+            private void rotateLeft(Graphics g2d) {
                 System.out.println("-");
             }
 
-            private void rotateRight(Graphics g) {
+            private void rotateRight(Graphics g2d) {
                 System.out.println("+");
             }
 
-            private void growBranch(Graphics g) {
+            private void growBranch(Graphics g2d) {
                 System.out.println("A");
                 testHeight += 20;
 
-                g.drawLine(300, startY,300,testHeight+2);
+                g2d.drawLine(300, startY,300,testHeight+2);
+                repaint();
             }
 
         };
