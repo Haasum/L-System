@@ -7,7 +7,6 @@ import javafx.scene.transform.Translate;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.util.*;
 import java.util.List;
@@ -26,7 +25,7 @@ public class Turtle extends JPanel {
     int lang;
     int start2;
     int branchHeight;
-    int startY = 600;
+    int startY = getHeight();
     int startX;
     int rotationen;
     int pushIt;
@@ -34,7 +33,7 @@ public class Turtle extends JPanel {
     boolean startDraw;
     List<Shape> shapes = new ArrayList<>(); //TEST
     List<Line2D> lines = new ArrayList<>();
-    List<Translate> translates = new ArrayList<>();
+    List<Integer> ints = new ArrayList<>();
 
     String drawThis = "A[+A][-A]"; //test string
 
@@ -60,7 +59,7 @@ public class Turtle extends JPanel {
                 Graphics2D g2d = (Graphics2D)g.create();
 
                 g2d.setColor(Color.red);
-                g2d.rotate(Math.toRadians(rotationen));
+
 
 
                 for (Shape shape: shapes)
@@ -69,21 +68,23 @@ public class Turtle extends JPanel {
                     //g2d.fill( shape );
                 }
 
-
-                for (Line2D line : lines)
-                {
-                    g2d.setColor(Color.black);
-                    g2d.draw( line );
-                    //g2d.translate(0.0,-200.0);
-                    g2d.translate(0,pushIt);
+                for (Integer integer : ints) {
+                   // g2d.rotate(Math.toRadians(ints.get(integer)));
 
                 }
 
-                //g2d.translate(0,pushIt);
-               /* for (Translate translate : translates)
+
+                for (Line2D line : lines)
                 {
-                   g2d.translate(0.0,-200.0);
-                } */
+                   // g2d.rotate(Math.toRadians(10), startX, startY);
+                    //g2d.rotate(Math.toRadians(rotationen));
+                    g2d.setColor(Color.black);
+                    g2d.draw( line );
+                    //g2d.translate(0,-branchHeight);
+                    //rotationen = 0;
+
+                }
+
                 g2d.dispose();
 
             }
@@ -112,24 +113,32 @@ public class Turtle extends JPanel {
 
             switch (currentCheck) {
                 case 'A':
+
                     System.out.println("A");
-                    branchHeight = 500;
+                    branchHeight += 30; //Getbranch height
                     startX = 300;
+
                     lines.add(new Line2D.Double(startX, startY, startX, branchHeight));
+
                     break;
                 case '+':
-
                     System.out.println("+");
+                    //rotationen = 0;
+                   // ints.add(new Integer(10));
                     break;
+
                 case '-':
+                    //rotationen = -10;
                     System.out.println("-");
+                   // ints.add(new Integer(-10));
                     break;
                 case '[':
+                    //translates.add(new Translate(0.0,0.0));
                     System.out.println("[");
-                    pushIt = -200;
+                    startY += branchHeight + 10;
                     break;
                 case ']':
-                    //pushIt = +100;
+                    //startY -= branchHeight - 10;
                     System.out.println("]");
                     break;
                 default:
