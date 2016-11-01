@@ -5,7 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-
+/**
+ * Denne klasse står for at få indputtet fra vores txt fil. Det indput skal kunne give et axiom og et regelsystem til vores Lsystem
+ */
 public class txt {
 
     public String inputFromTxt;

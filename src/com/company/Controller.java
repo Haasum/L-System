@@ -10,6 +10,10 @@ import LsysRecursive.txt;
  */
 public class Controller {
 
+    /**
+     * Controller skal stå for at styre alle de andre klasser som en superclass, dog med nogen undtagelser
+     */
+
     public Controller(){
 
         //System.out.println("Main is ON");
