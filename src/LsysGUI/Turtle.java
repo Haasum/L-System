@@ -78,9 +78,9 @@ public class Turtle extends JPanel {
                 {
                    // g2d.rotate(Math.toRadians(10), startX, startY);
                     //g2d.rotate(Math.toRadians(rotationen));
+                    g2d.translate(0,60);
                     g2d.setColor(Color.black);
                     g2d.draw( line );
-                    //g2d.translate(0,-branchHeight);
                     //rotationen = 0;
 
                 }
@@ -115,7 +115,7 @@ public class Turtle extends JPanel {
                 case 'A':
 
                     System.out.println("A");
-                    branchHeight += 30; //Getbranch height
+                    branchHeight = 50; //Getbranch height
                     startX = 300;
 
                     lines.add(new Line2D.Double(startX, startY, startX, branchHeight));
@@ -135,7 +135,7 @@ public class Turtle extends JPanel {
                 case '[':
                     //translates.add(new Translate(0.0,0.0));
                     System.out.println("[");
-                    startY += branchHeight + 10;
+                    //startY += branchHeight + 10;
                     break;
                 case ']':
                     //startY -= branchHeight - 10;
