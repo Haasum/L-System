@@ -3,10 +3,12 @@ package LsysGUI;
 import LsysRecursive.Grammatik;
 import LsysRecursive.RecursiveLsys;
 import com.sun.javafx.geom.transform.Translate2D;
+import javafx.scene.transform.Transform;
 import javafx.scene.transform.Translate;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 import java.util.*;
 import java.util.List;
@@ -75,12 +77,19 @@ public class Turtle extends JPanel {
 
 
                 for (Line2D line : lines)
+
                 {
                    // g2d.rotate(Math.toRadians(10), startX, startY);
                     //g2d.rotate(Math.toRadians(rotationen));
+                    AffineTransform saveMatrix;
+
+                    saveMatrix = g2d.getTransform();
+                    //g2d.getTransform();
                     g2d.translate(0,60);
                     g2d.setColor(Color.black);
                     g2d.draw( line );
+                    g2d.setTransform(saveMatrix);
+
                     //rotationen = 0;
 
                 }
