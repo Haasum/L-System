@@ -60,7 +60,10 @@ public class Turtle extends JPanel {
 
             public void paintComponent(Graphics g) {
 
-
+            /*Hold styr på screenkoordinater kontra turtlekoordinater
+            * for hver gang der laves et translate, gemmes koordinater i skærm, x&y
+            *
+            * Display tree, har en expanded tree. som parameter*/
 
                 super.paintComponent(g);
                 Graphics2D g2d = (Graphics2D)g.create();
