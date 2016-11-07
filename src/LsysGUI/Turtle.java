@@ -2,18 +2,11 @@ package LsysGUI;
 
 import LsysRecursive.Grammatik;
 import LsysRecursive.RecursiveLsys;
-import javafx.animation.TranslateTransition;
-import javafx.scene.shape.Line;
-import javafx.scene.transform.Rotate;
-import javafx.scene.transform.Transform;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.Event;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.*;
 import java.util.List;
 
@@ -22,85 +15,70 @@ import static LsysGUI.GUI.mainPanel;
 
 public class Turtle extends JPanel {
 
-    Primitives primitives;
     Grammatik grammatik;
     int growIs;
+    char c = 'A';
+    private double turnIs;
     JPanel testPanel;
-    Graphics g2d;
+    Graphics g;
+    int lang;
+    int start2;
+    int branchHeight;
+    int startY;
+    int startX;
+    int rotationen;
+    int pushIt;
     AffineTransform saveMatrix;
     AffineTransform newMatrix;
-    AffineTransform rotateMatrix;
     AffineTransform oldMatrix;
+    int pushY;
+    boolean pop;
     int testHeight;
-    int startY;
-    int rotateX;
-    int middle;
-    int height;
-    int transY;
-    Line branch;
+    int testY;
+    boolean push = false;
 
     boolean startDraw;
+    List<Shape> shapes = new ArrayList<>(); //TEST
+    List<Line2D> lines = new ArrayList<>();
+    List<Integer> ints = new ArrayList<>();
+
     String drawThis = "A[+A][-A]"; //test string
 
 
     public Turtle(Grammatik grammatik, RecursiveLsys lsys) {
-        middle = 300;
         this.grammatik = grammatik;
         startDraw = false;
         System.out.println(growIs);
         makeTestPanel();
+       // drawTurtle();
 
 
     }
 
     private void makeTestPanel() {
-        testPanel = new JPanel() {
+        JPanel testPanel = new JPanel() {
 
             public void paintComponent(Graphics g) {
 
 
+
                 super.paintComponent(g);
-                Graphics2D g2d = (Graphics2D) g.create();
+                Graphics2D g2d = (Graphics2D)g.create();
+
+
                 g2d.setColor(Color.BLACK);
 
-                oldMatrix =  AffineTransform.getTranslateInstance(50, 200);
-               // g2d.setTransform(oldMatrix);
-
-                testPanel.addPropertyChangeListener(new PropertyChangeListener() {
-                    @Override
-                    public void propertyChange(PropertyChangeEvent evt) {
-                        String propertyName = evt.getPropertyName();
-                        switch (propertyName) {
-                            case "push":
-                                g2d.setTransform((AffineTransform) evt.getNewValue());
-                                System.out.println("new matrix is " + newMatrix);
-                                //setForeground((Color) evt.getNewValue());
-                                break;
-                            case "pop":
-                                g2d.setTransform((AffineTransform) evt.getNewValue());
-                            case "rotateLeft":
-                                g2d.setTransform((AffineTransform) evt.getNewValue());
-                               // g2d.rotate(Math.toRadians(10), Turtle.this.getX(), Turtle.this.getY());
-                            case "rotateRight":
-                                g2d.setTransform((AffineTransform) evt.getNewValue());
-                               // g2d.rotate(Math.toRadians(20), Turtle.this.getX(), Turtle.this.getY());
-                            default:
-                        }
-                    }
-                });
-
-
-
-
-                        //g2d.setTransform(newMatrix);
-                        //g2d.getTransform(addPropertyChangeListener(newForm));
-                        // g2d.getTransform(EventTarget(change));
-                        //g2d.setTransform(saveMatrix);
+                //g2d.setTransform(newMatrix);
 
 
                 for (int i = 0; i < drawThis.length(); i++) {
                     char currentCheck = drawThis.charAt(i);
 
+                    //DEN RIGTIGE:
+                  /*  if (Character.isLetter(currentCheck)) {
+                        branchHeight = 500;
+                        System.out.println(growIs);
+                    }  //TODO: det skal være med denne det skal kører */
 
                     switch (currentCheck) {
                         case 'A':
@@ -128,48 +106,38 @@ public class Turtle extends JPanel {
             }
 
             private void push(Graphics g2d, AffineTransform transform) {
-                height ++;
                 System.out.println("[");
                 saveMatrix = transform;
+                System.out.println("savematrix is " +saveMatrix);
 
+                newMatrix = AffineTransform.getTranslateInstance(0,-50);
+                transform.setTransform(newMatrix);
 
-                newMatrix = AffineTransform.getTranslateInstance(0, 0);
-                newMatrix = AffineTransform.getRotateInstance(0,middle,rotateX);
-                firePropertyChange("push", null, newMatrix);
+                System.out.println("newmatrix is" + newMatrix);
+
 
 
             }
 
             private void pop(Graphics g2d) {
-                height --;
                 System.out.println("]");
-                firePropertyChange("pop", null, saveMatrix);
             }
+
+
 
             private void rotateLeft(Graphics g2d) {
-                rotateX = height * testHeight;
                 System.out.println("-");
-                newMatrix = AffineTransform.getRotateInstance(2.5,middle,rotateX);
-                firePropertyChange("rotateLeft", null, newMatrix);
             }
 
-
             private void rotateRight(Graphics g2d) {
-                rotateX = height * testHeight;
-                newMatrix = AffineTransform.getRotateInstance(-2.5,middle,rotateX);
-                firePropertyChange("rotateRight", null, newMatrix);
                 System.out.println("+");
             }
 
             private void growBranch(Graphics g2d) {
                 System.out.println("A");
-                testHeight = 50;
+                testHeight = 20;
                 startY = this.getY();
-                Line line = new Line(middle, startY, middle, testHeight); //prøver at lave den så den kan refereres til
-                g2d.drawLine(middle, startY, middle, testHeight);
-
-                Double Y = line.getEndY();
-                System.out.println("Y is " + Y);
+                g2d.drawLine(300,0,300,testHeight+5);
             }
 
         };
@@ -180,22 +148,9 @@ public class Turtle extends JPanel {
         testPanel.setLayout(null);
         mainPanel.add(testPanel);
 
-        testHeight = 50;
-
-
     }
 
-
-
 }
-
-
-
-
-/**
- * TODO: NAJA!
- * klasse skal være abstractaction
- */
 
 
            /*

@@ -21,7 +21,7 @@ public class RecursiveLsys {
     char LetterA = 'A';
     String ruleA = "[+A]";
     String treeLsys1 = "";
-    int genNo1 = 0;
+    int genNo1 = 3;
 
     public RecursiveLsys(Grammatik grammatik) {
         this.grammatik = grammatik;
@@ -32,20 +32,26 @@ public class RecursiveLsys {
 
     public String expand(String s, int genNo1) {
         String next = "";
-        if (genNo1 > 1) {
+        if (genNo1 == 0) {
             System.out.println("done");
             return s;
         }
 
+        /*
+        *
+        * */
+
+
         for (int i = 0; i < s.length(); i++) {
             char curr = s.charAt(i);
             String expandRule = checkLetterInAlpha(curr);
-            if (expandRule != null) {
-                next += LetterA + expand(expandRule, genNo1 + 1);
+            if (expandRule != "") {
+                next += expand(expandRule, genNo1 - 1);
+
             }
             else {
                 next += curr;
-                break;
+
             }
             /*for (int j = 0; j < ruleset.size(); j++) {
                 char alphaCurr = ruleset.get(j).getAlfabet();
