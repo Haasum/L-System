@@ -19,6 +19,7 @@ public class Grammatik {
        // System.out.println("Grammatik is ON");
         this.textFile = textFile + '.';
         readRules();
+        addPrimitives();
         defineGrowInRuleset();
     }
 
@@ -49,6 +50,13 @@ public class Grammatik {
         rule = new Rule(currentLetter, currRule);
         ruleset.add(rule);
         currRule = ""; //currRule nulstilles
+    }
+
+    public void addPrimitives(){
+        char[] primitives = new char[]{'[',']','+','-'};
+        for (char c :primitives) {
+            Rule primitive = new Rule(c);
+        }
     }
 
     public ArrayList<Rule> getRuleset(){
