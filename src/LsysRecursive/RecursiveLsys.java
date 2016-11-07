@@ -1,6 +1,5 @@
 package LsysRecursive;
 
-import com.sun.org.apache.xml.internal.resolver.readers.TR9401CatalogReader;
 
 import java.util.ArrayList;
 
@@ -11,13 +10,14 @@ import java.util.ArrayList;
  * Mangler lige nu: Hente regler (ruleobjekter), som er lagret i Grammatik. Hvad skal stoppe rekursionen?
  * Spørgsmål til John: Hvordan gemmes hver streng bedst?
  */
+
 public class RecursiveLsys {
     ArrayList<Rule> ruleset;
     Grammatik grammatik;
     char Axiom; // TODO tjek Johns eksempler; Axiom som String?
     String treeSys;
     int genNo = 0;
-    char axiom1 = '+';
+    char axiom1 = 'A';
     char LetterA = 'A';
     String ruleA = "[+A]";
     String treeLsys1 = "";
