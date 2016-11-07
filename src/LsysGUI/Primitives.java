@@ -1,3 +1,6 @@
+//TODO: DENNE KLASSE HAR INGEN FUNKTION PT! skal dog bruges i forbindelse med turtle senere
+
+
 package LsysGUI;
 
 import LsysRecursive.Grammatik;

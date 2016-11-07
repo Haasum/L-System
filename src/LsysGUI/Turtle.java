@@ -56,14 +56,14 @@ public class Turtle extends JPanel {
     private void makeTestPanel() {
         testPanel = new JPanel() {
 
-            public void paintComponent(Graphics g) {
+            public void paintComponent(Graphics g) { //TODO: få så meget som muligt ud af paintcomponent metoden
 
 
                 super.paintComponent(g);
                 Graphics2D g2d = (Graphics2D) g.create();
                 g2d.setColor(Color.BLACK);
 
-                oldMatrix =  AffineTransform.getTranslateInstance(50, 200);
+               // oldMatrix =  AffineTransform.getTranslateInstance(50, 200);
                 // g2d.setTransform(oldMatrix);
 
                 testPanel.addPropertyChangeListener(new PropertyChangeListener() {
@@ -96,7 +96,7 @@ public class Turtle extends JPanel {
                 //g2d.getTransform(addPropertyChangeListener(newForm));
                 // g2d.getTransform(EventTarget(change));
                 //g2d.setTransform(saveMatrix);
-
+//TODO: herfra og ned skal som udgangspunkt ud af paintcomponent
 
                 for (int i = 0; i < drawThis.length(); i++) {
                     char currentCheck = drawThis.charAt(i);
