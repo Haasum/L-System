@@ -3,12 +3,14 @@ package LsysGUI;
 import LsysRecursive.Grammatik;
 import LsysRecursive.RecursiveLsys;
 import javafx.scene.shape.Line;
+import javafx.scene.transform.Affine;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 
 import static LsysGUI.GUI.mainPanel;
 
@@ -31,6 +33,7 @@ public class Turtle extends JPanel {
     int height;
     int transY;
     Line branch;
+    ArrayList<AffineTransform> stack = new ArrayList<AffineTransform>();
 
     boolean startDraw;
     String drawThis = "A[+A[+A]][-A]"; //test string
@@ -56,7 +59,7 @@ public class Turtle extends JPanel {
                 Graphics2D g2d = (Graphics2D) g.create();
                 g2d.setColor(Color.BLACK);
 
-               // oldMatrix =  AffineTransform.getTranslateInstance(50, 200);
+                // oldMatrix =  AffineTransform.getTranslateInstance(50, 200);
                 // g2d.setTransform(oldMatrix);
 
                 testPanel.addPropertyChangeListener(new PropertyChangeListener() {
@@ -76,7 +79,7 @@ public class Turtle extends JPanel {
                                 // g2d.rotate(Math.toRadians(10), Turtle.this.getX(), Turtle.this.getY());
                             case "rotateRight":
                                 g2d.setTransform((AffineTransform) evt.getNewValue());
-                               // g2d.rotate(Math.toRadians(60),middle,rotateY);
+                                // g2d.rotate(Math.toRadians(60),middle,rotateY);
                                 // g2d.rotate(Math.toRadians(20), Turtle.this.getX(), Turtle.this.getY());
                             default:
                         }
@@ -91,7 +94,7 @@ public class Turtle extends JPanel {
                 // g2d.getTransform(EventTarget(change));
                 //g2d.setTransform(saveMatrix);
 //TODO: herfra og ned skal som udgangspunkt ud af paintcomponent
-
+                g2d.translate(300,0);
                 for (int i = 0; i < drawThis.length(); i++) {
                     char currentCheck = drawThis.charAt(i);
 
@@ -121,51 +124,61 @@ public class Turtle extends JPanel {
 
             }
 
-            private void push(Graphics g2d, AffineTransform transform) {
+            private void push(Graphics2D g2d, AffineTransform transform) {
                 height ++;
                 System.out.println("[");
 
-                saveMatrix = transform;
+                stack.add(g2d.getTransform());
+
+                // saveMatrix = transform;
 
                 //turtle er altid 0,0. hold styr på hvor på skærmen turtle er
-                newMatrix = AffineTransform.getTranslateInstance(0, 0); //skal ligge i growBranch
-                newMatrix = AffineTransform.getRotateInstance(0,middle, rotateY);
+                //newMatrix = AffineTransform.getTranslateInstance(0, 0); //skal ligge i growBranch
+                //newMatrix = AffineTransform.getRotateInstance(0,middle, rotateY);
 
-                firePropertyChange("push", null, newMatrix);
+                //firePropertyChange("push", null, newMatrix);
 
 
             }
 
-            private void pop(Graphics g2d) {
+            private void pop(Graphics2D g2d) {
                 height --;
                 System.out.println("]");
-                firePropertyChange("pop", null, saveMatrix);
+                //firePropertyChange("pop", null, saveMatrix);
+                AffineTransform t = stack.get(stack.size()-1);
+                g2d.setTransform(t);
+                stack.remove(stack.size()-1);
             }
 
-            private void rotateLeft(Graphics g2d) {
-                rotateY = height * testHeight;
+            private void rotateLeft(Graphics2D g2d) {
+                //rotateY = height * testHeight;
                 System.out.println("-");
-                newMatrix = AffineTransform.getRotateInstance(2.5,middle, rotateY);
-                firePropertyChange("rotateLeft", null, newMatrix);
+                // = AffineTransform.getRotateInstance(2.5,middle, rotateY);
+                //("rotateLeft", null, newMatrix);
+                g2d.rotate(Math.PI/6);
             }
 
 
-            private void rotateRight(Graphics g2d) {
-                rotateY = height * testHeight;
-                newMatrix = AffineTransform.getRotateInstance(-2.5,middle, rotateY);
-                firePropertyChange("rotateRight", null, newMatrix);
+            private void rotateRight(Graphics2D g2d) {
+                //rotateY = height * testHeight;
+                //newMatrix = AffineTransform.getRotateInstance(-2.5,middle, rotateY);
+                //firePropertyChange("rotateRight", null, newMatrix);
                 System.out.println("+");
+                g2d.rotate(-Math.PI/6);
             }
 
-            private void growBranch(Graphics g2d) {
+            private void growBranch(Graphics2D g2d) {
                 System.out.println("A");
                 testHeight = 50;
-                startY = this.getY();
-                Line line = new Line(middle, startY, middle, testHeight); //prøver at lave den så den kan refereres til
-                g2d.drawLine(middle, startY, middle, testHeight);
+                g2d.drawLine(0,0,0, testHeight);
+                g2d.translate(0, testHeight);
 
-                Double Y = line.getEndY();
-                System.out.println("Y is " + Y);
+                //Double Y = line.getEndY();
+                //System.out.println("Y is " + Y);
+                AffineTransform currentT = g2d.getTransform();
+                //currentT.getTranslateX();
+
+                System.out.println("current transform X " + currentT.getTranslateX() + "Y is " + currentT.getTranslateY()); //get window location
             }
 
         };
