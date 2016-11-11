@@ -91,7 +91,7 @@ public class Turtle extends JPanel {
 
 
             private void rotateRight(Graphics2D g2d) {
-                g2d.rotate(-Math.PI/6);
+                g2d.rotate(-Math.PI/6); //JOHN ÆNDRINGER FLOT
             }
 
             private void growBranch(Graphics2D g2d) {
