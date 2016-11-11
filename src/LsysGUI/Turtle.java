@@ -2,20 +2,13 @@ package LsysGUI;
 
 import LsysRecursive.Grammatik;
 import LsysRecursive.RecursiveLsys;
-import javafx.animation.TranslateTransition;
 import javafx.scene.shape.Line;
-import javafx.scene.transform.Rotate;
-import javafx.scene.transform.Transform;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.Event;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Line2D;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.*;
-import java.util.List;
 
 import static LsysGUI.GUI.mainPanel;
 
@@ -33,14 +26,14 @@ public class Turtle extends JPanel {
     AffineTransform oldMatrix;
     int testHeight;
     int startY;
-    int rotateX;
+    int rotateY;
     int middle;
     int height;
     int transY;
     Line branch;
 
     boolean startDraw;
-    String drawThis = "A[+A][-A]"; //test string
+    String drawThis = "A[+A[+A]][-A]"; //test string
 
 
     public Turtle(Grammatik grammatik, RecursiveLsys lsys) {
@@ -83,6 +76,7 @@ public class Turtle extends JPanel {
                                 // g2d.rotate(Math.toRadians(10), Turtle.this.getX(), Turtle.this.getY());
                             case "rotateRight":
                                 g2d.setTransform((AffineTransform) evt.getNewValue());
+                               // g2d.rotate(Math.toRadians(60),middle,rotateY);
                                 // g2d.rotate(Math.toRadians(20), Turtle.this.getX(), Turtle.this.getY());
                             default:
                         }
@@ -130,11 +124,13 @@ public class Turtle extends JPanel {
             private void push(Graphics g2d, AffineTransform transform) {
                 height ++;
                 System.out.println("[");
+
                 saveMatrix = transform;
 
+                //turtle er altid 0,0. hold styr på hvor på skærmen turtle er
+                newMatrix = AffineTransform.getTranslateInstance(0, 0); //skal ligge i growBranch
+                newMatrix = AffineTransform.getRotateInstance(0,middle, rotateY);
 
-                newMatrix = AffineTransform.getTranslateInstance(0, 0);
-                newMatrix = AffineTransform.getRotateInstance(0,middle,rotateX);
                 firePropertyChange("push", null, newMatrix);
 
 
@@ -147,16 +143,16 @@ public class Turtle extends JPanel {
             }
 
             private void rotateLeft(Graphics g2d) {
-                rotateX = height * testHeight;
+                rotateY = height * testHeight;
                 System.out.println("-");
-                newMatrix = AffineTransform.getRotateInstance(2.5,middle,rotateX);
+                newMatrix = AffineTransform.getRotateInstance(2.5,middle, rotateY);
                 firePropertyChange("rotateLeft", null, newMatrix);
             }
 
 
             private void rotateRight(Graphics g2d) {
-                rotateX = height * testHeight;
-                newMatrix = AffineTransform.getRotateInstance(-2.5,middle,rotateX);
+                rotateY = height * testHeight;
+                newMatrix = AffineTransform.getRotateInstance(-2.5,middle, rotateY);
                 firePropertyChange("rotateRight", null, newMatrix);
                 System.out.println("+");
             }
