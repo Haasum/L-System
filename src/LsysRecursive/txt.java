@@ -13,7 +13,7 @@ public class txt {
     public String inputFromTxt;
 
     public txt() {
-       BufferedReader br = null;
+     /*  BufferedReader br = null;
         try {
             br = new BufferedReader(new FileReader("C:\\Users\\naja\\IdeaProjects\\GITHUB\\Proto2\\src\\LsysRecursive\\testTxt.txt"));
         } catch (FileNotFoundException e) {
@@ -47,13 +47,13 @@ public class txt {
                 e.printStackTrace();
             }
 
-        }
+        } */
 
     }
 
         public String getTxtFile() { //her laves tekstfilen om til en string, der kan tilgås fra andre klasser
-           return this.inputFromTxt; // når input fra textFil skal virke
-           // return "A:ABA,B:BCB,C:ACA,"; // til test
+          // return this.inputFromTxt; // når input fra textFil skal virke
+            return "A:ABA,B:BCB,C:ACA,"; // til test
         }
 
 
