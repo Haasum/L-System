@@ -11,6 +11,5 @@ public class Main extends JPanel {
 
         Controller control = new Controller();
 
-
     }
 }

@@ -13,9 +13,9 @@ public class txt {
     public String inputFromTxt;
 
     public txt() {
-      /*  BufferedReader br = null;
+       BufferedReader br = null;
         try {
-            br = new BufferedReader(new FileReader("C:\\Users\\naja\\IdeaProjects\\Proto2\\Proto2\\src\\LsysRecursive\\testTxt.txt"));
+            br = new BufferedReader(new FileReader("C:\\Users\\naja\\IdeaProjects\\GITHUB\\Proto2\\src\\LsysRecursive\\testTxt.txt"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -38,7 +38,7 @@ public class txt {
                 }
             }
             String everything = sb.toString();
-            //System.out.println("textfilen er: " + everything); //fortæller os hvad tekstfilen er
+            System.out.println("textfilen er: " + everything); //fortæller os hvad tekstfilen er
             inputFromTxt = everything;
         } finally {
             try {
@@ -46,33 +46,17 @@ public class txt {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            //TODO: Ryd op i klasserne når proto2 er færdig
 
-        } */
+        }
 
     }
 
         public String getTxtFile() { //her laves tekstfilen om til en string, der kan tilgås fra andre klasser
-           // return this.inputFromTxt; // når input fra textFil skal virke
-            return "A:ABA,B:BCB,C:ACA,"; // til test
+           return this.inputFromTxt; // når input fra textFil skal virke
+           // return "A:ABA,B:BCB,C:ACA,"; // til test
         }
 
 
 
 
 }
-
-
-
-
-
-/*
-public class txt {
-    String textFile = ("A:ABA,B:BCB,C:ACA");
-
-    public String getTxtFile(){
-        return textFile;
-
-    }
-
-} */

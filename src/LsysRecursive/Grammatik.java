@@ -12,11 +12,8 @@ public class Grammatik {
     String currRule = "";
     Rule rule;
     char axiom = 'A';
-    int grow =0;
-    double turn;
 
     public Grammatik(String textFile) {
-       // System.out.println("Grammatik is ON");
         this.textFile = textFile + '.';
         readRules();
         addPrimitives();
@@ -52,7 +49,7 @@ public class Grammatik {
         currRule = ""; //currRule nulstilles
     }
 
-    public void addPrimitives(){
+    public void addPrimitives(){ //TODO: skal impleme
         char[] primitives = new char[]{'[',']','+','-'};
         for (char c :primitives) {
             Rule primitive = new Rule(c);
@@ -79,37 +76,6 @@ public class Grammatik {
                 ruleset.get(i).setGrow(11);
             }
         }
-    }
-
-    public int getGrow(char charCheck) {
-
-        if (charCheck == 'A') {
-            grow = 5;
-        }
-
-        if (charCheck == 'B') {
-            grow = 8;
-        }
-        if (charCheck == 'C') {
-            grow = 11;
-        }
-        return grow;
-    }
-    public double getTurn(char charCheck){
-
-        if(charCheck == 'A') {
-            turn = 0.1;
-        }
-
-        if(charCheck == 'B'){
-            turn = 0.2;
-        }
-
-        if(charCheck == 'C'){
-            turn = 0.3;
-        }
-
-        return turn;
     }
 }
 

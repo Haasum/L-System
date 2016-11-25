@@ -3,23 +3,12 @@ package LsysRecursive;
 
 import java.util.ArrayList;
 
-/**s
- * Denne klasse har metoden generateLsys. Ideen med denne: Den skal have en streng som parameter og gennemløbe den.
- * For hver gang den finder et bogstav fra Grammatik, skal den lave et rekursivt kald parametermed bogstavets
- * repræsentative regel, også fundet i Grammatik.
- * Mangler lige nu: Hente regler (ruleobjekter), som er lagret i Grammatik. Hvad skal stoppe rekursionen?
- * Spørgsmål til John: Hvordan gemmes hver streng bedst?
- */
-
 public class RecursiveLsys {
     ArrayList<Rule> ruleset;
     Grammatik grammatik;
-    char Axiom; // TODO tjek Johns eksempler; Axiom som String?
+    char Axiom;
     String treeSys;
-    int genNo = 0;
     char axiom1 = 'A';
-    char LetterA = 'A';
-    String ruleA = "[+A]";
     String treeLsys1 = "";
     int genNo1 = 3;
 
@@ -53,18 +42,6 @@ public class RecursiveLsys {
                 next += curr;
 
             }
-            /*for (int j = 0; j < ruleset.size(); j++) {
-                char alphaCurr = ruleset.get(j).getAlfabet();
-                if (curr == alphaCurr) {
-                    next += LetterA + expand(ruleset.get(j).getRegel(), genNo1 + 1);
-                    //next += LetterA + expand(ruleA, genNo1+1);
-                    break;
-                } else {
-                    next += curr;
-                    break;
-                }
-            }
-*/
         }
         System.out.println("generation: " + genNo1 + "current alphabet " + next);
         return next;
