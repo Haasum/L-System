@@ -11,23 +11,22 @@ import java.util.*;
  */
 public class txt {
 
-    public String inputFromTxt;
+    public String inputFromTxt = "A:ABA,A:BCB,C:ACA,";
     public String endInput;
     public StringBuilder endOutput= new StringBuilder();
     public String txtInput;
 
     ArrayList<Character> stack = new ArrayList<Character>();
-    ArrayList<Character> stack2 = new ArrayList<Character>();
 
     Map<Integer,String> myMap = new HashMap<Integer,String>();
     //
 
     public txt() {
-        checkTxt();
+        //checkTxt();
         checkRandom();
     }
 
-    public void checkTxt() {
+    /* public void checkTxt() {
         BufferedReader br = null;
         try {
             br = new BufferedReader(new FileReader("C:\\Users\\naja\\IdeaProjects\\GITHUB\\Proto2\\src\\LsysRecursive\\testTxt.txt"));
@@ -64,11 +63,11 @@ public class txt {
 
         }
 
-    }
+    } */
 
     public String getTxtFile() { //her laves tekstfilen om til en string, der kan tilgås fra andre klasser
-        return this.inputFromTxt; // når input fra textFil skal virke
-        // return "A:ABA,B:BCB,C:ACA,"; // til test
+        //return this.inputFromTxt; // når input fra textFil skal virke
+        return "A:ABA,B:BCB,C:ACA,"; // til test
     }
 
     public void checkRandom() { //TODO: CheckRandom metoder virker kun hvis tekstfilen har 3 inputs. skal også virke ved 2 og 1 input
@@ -136,6 +135,7 @@ public class txt {
             }
         }
         else {
+            endOutput.append(',');
             endOutput.append(a);
             for (int j = 0; j < 10; j++) {
                 Random rand = new Random();

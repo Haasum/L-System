@@ -1,1 +1,1 @@
-A:ABA,A:AAA,B:BAB,
+A:ABA,B:AAA,C:BAB,
