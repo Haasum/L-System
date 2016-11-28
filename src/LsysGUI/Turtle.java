@@ -13,6 +13,8 @@ import java.awt.geom.AffineTransform;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import static LsysGUI.GUI.mainPanel;
 
@@ -28,6 +30,7 @@ public class Turtle extends JPanel {
     ArrayList<JButton> buttonlist= new ArrayList<>();
     int test = 0;
     JButton buttons[];
+    Map<Integer,AffineTransform> terminalProp = new HashMap<Integer,AffineTransform>();
 
 
     String drawThis = "F[-F[-F[+F][-F]][+F[+F][-F]]][[+F[-F[A]][+F[A]]]";
@@ -121,27 +124,32 @@ public class Turtle extends JPanel {
                 AffineTransform currentT = g2d.getTransform();//saves the currenttransform to an array of old transforms
                 int buttonX = (int) currentT.getTranslateX();
                 int buttonY = (int) currentT.getTranslateY();
-                int buttonsize = 50;
+                int buttonsize = 10;
 
                 JButton terminalBtn = new JButton(String.valueOf(test));
                 testPanel.add(terminalBtn);
                 terminalBtn.setBounds(buttonX-buttonsize/2,buttonY,buttonsize,buttonsize);
+                terminalBtn.setBackground(Color.black);
                 terminalBtn.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        System.out.println("button pressed");
+                        int btnpressed = Integer.parseInt(e.getActionCommand());
+                        terminalProp.put(btnpressed,currentT);
+                        System.out.println(terminalProp);
+                        expandTree(terminalProp.get(btnpressed), g2d);
                     }
-                });
 
+                });
 
                 oldTrans.add(currentT);
 
-
-
-
-
-
             }
+
+            public void expandTree(AffineTransform transform, Graphics2D g2d) {
+                g2d.setTransform(transform);
+                g2d.drawLine(0,0,0, testHeight);
+            }
+
 
         };
 
@@ -155,6 +163,8 @@ public class Turtle extends JPanel {
 
 
     }
+
+
 
 
 }
