@@ -7,6 +7,8 @@ import javafx.scene.transform.Affine;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -23,6 +25,9 @@ public class Turtle extends JPanel {
     int i = 0;
     ArrayList<AffineTransform> stack = new ArrayList<AffineTransform>();
     ArrayList <AffineTransform> oldTrans = new ArrayList<>();
+    ArrayList<JButton> buttonlist= new ArrayList<>();
+    int test = 0;
+    JButton buttons[];
 
 
     String drawThis = "F[-F[-F[+F][-F]][+F[+F][-F]]][[+F[-F[A]][+F[A]]]";
@@ -91,11 +96,11 @@ public class Turtle extends JPanel {
             }
 
             private void rotateLeft(Graphics2D g2d) {
-                g2d.rotate(Math.PI/20);
+                g2d.rotate(Math.PI/10);
             }
 
 
-            private void rotateRight(Graphics2D g2d) { g2d.rotate(-Math.PI/20); }
+            private void rotateRight(Graphics2D g2d) { g2d.rotate(-Math.PI/10); }
 
             private void growBranch(Graphics2D g2d, char a) {
                 testHeight = 35;
@@ -111,10 +116,30 @@ public class Turtle extends JPanel {
 
 
             private void savePoint(Graphics2D g2d) {
-                g2d.fillOval(0-5,0,10,10);
+                test++;
 
                 AffineTransform currentT = g2d.getTransform();//saves the currenttransform to an array of old transforms
+                int buttonX = (int) currentT.getTranslateX();
+                int buttonY = (int) currentT.getTranslateY();
+                int buttonsize = 50;
+
+                JButton terminalBtn = new JButton(String.valueOf(test));
+                testPanel.add(terminalBtn);
+                terminalBtn.setBounds(buttonX-buttonsize/2,buttonY,buttonsize,buttonsize);
+                terminalBtn.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println("button pressed");
+                    }
+                });
+
+
                 oldTrans.add(currentT);
+
+
+
+
+
 
             }
 
