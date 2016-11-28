@@ -13,10 +13,11 @@ import java.awt.*;
  */
 public class GUI extends JFrame {
 
-Turtle turtle;
+    Turtle turtle;
     Grammatik grammatik;
     RecursiveLsys lsys;
     static JPanel mainPanel = new JPanel();
+    ImageIcon cursorPic = new ImageIcon("C:\\Users\\naja\\IdeaProjects\\GITHUB\\Proto2\\src\\LsysGUI\\kande.png"); //cursor Path
 
     public GUI() {
 
@@ -31,8 +32,10 @@ Turtle turtle;
 
 
         drawMainPanel();
+        cursor();
 
     }
+
     public void drawMainPanel() {
         //the mainPanel:
         add(mainPanel);
@@ -40,12 +43,14 @@ Turtle turtle;
         mainPanel.setVisible(true);
         mainPanel.setBackground(null);
         mainPanel.setLayout(null);
-        //mainPanel.add(turtle);
     }
 
+    public void cursor() {
+        setCursor(Toolkit.getDefaultToolkit().createCustomCursor(cursorPic.getImage(), new Point(0, 0), "customCursor"));
 
 
     }
+}
 
 
 
