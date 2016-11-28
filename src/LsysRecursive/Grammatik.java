@@ -4,6 +4,7 @@
  */
 
 package LsysRecursive;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 public class Grammatik {
     ArrayList<Rule> ruleset;
@@ -17,7 +18,6 @@ public class Grammatik {
         this.textFile = textFile + '.';
         readRules();
         addPrimitives();
-        defineGrowInRuleset();
     }
 
     public void readRules() { //læser reglerne og deler dem op i i rule-letter og rule
@@ -27,6 +27,7 @@ public class Grammatik {
             char current = textFile.charAt(i);
             if (current == ':') {
                 currentLetter = textFile.charAt(i - 1); //her tilføjes char til venstre for ':' til currentLetter (=ruleLetter)
+                System.out.println("regel er " + currentLetter);
             }
             if (current == ',') { //hver gang current er ',' starter sendRules metoden, og buildRule nulstilles
                 addRule();
@@ -44,6 +45,7 @@ public class Grammatik {
     }
 
     private void addRule() { //reglerne sendes. det er også her de skal gemmes
+        //TODO: her skal array af current letter
         rule = new Rule(currentLetter, currRule);
         ruleset.add(rule);
         currRule = ""; //currRule nulstilles
@@ -62,20 +64,6 @@ public class Grammatik {
 
     public char getAxiom() {
         return axiom;
-    }
-
-    public void defineGrowInRuleset(){
-        for (int i = 0; i < ruleset.size(); i++) {
-            if (ruleset.get(i).getAlfabet() == 'A') {
-                ruleset.get(i).setGrow(5);
-            }
-            if (ruleset.get(i).getAlfabet() == 'B') {
-                ruleset.get(i).setGrow(8);
-            }
-            if (ruleset.get(i).getAlfabet() == 'C') {
-                ruleset.get(i).setGrow(11);
-            }
-        }
     }
 }
 

@@ -18,7 +18,7 @@ public class Controller {
 
         //System.out.println("Main is ON");
         txt test = new txt();
-        String txtFile = test.getTxtFile();
+        String txtFile = test.getTxtInput();
         //System.out.println("text file is " + txtFile);
 
         Grammatik grammatik = new Grammatik(txtFile);

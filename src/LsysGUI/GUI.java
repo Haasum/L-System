@@ -22,6 +22,7 @@ Turtle turtle;
 
         Turtle turtle = new Turtle(grammatik, lsys);
 
+
         setTitle("Growing Tree");
         setSize(600, 600);
         setVisible(true);
