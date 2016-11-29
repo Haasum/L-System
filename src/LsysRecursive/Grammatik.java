@@ -4,7 +4,6 @@
  */
 
 package LsysRecursive;
-import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 public class Grammatik {
     ArrayList<Rule> ruleset;
@@ -16,13 +15,15 @@ public class Grammatik {
 
     public Grammatik(String textFile) {
         this.textFile = textFile + '.';
-        System.out.println("textfile is " + textFile);
-        readRules();
-        addPrimitives();
+        initGrammatik();
     }
-
-    public void readRules() { //læser reglerne og deler dem op i i rule-letter og rule
+    public void initGrammatik(){
         ruleset = new ArrayList<>();
+        addPrimitives();
+        readRules();
+
+    }
+    public void readRules() { //læser reglerne og deler dem op i i rule-letter og rule
         for (int i = 0; i < textFile.length()-1; i++) { //kører i textfilens længde
             StringBuilder buildRule = new StringBuilder();
             char current = textFile.charAt(i);
@@ -34,7 +35,7 @@ public class Grammatik {
                 addRule();
                 buildRule.setLength(0);
             }
-             if (textFile.charAt(i+1) != ':' && Character.isLetter(current)) {//hvis current ikke er til venstre for ':' OG current er et bogstav:
+            if (textFile.charAt(i+1) != ':' && Character.isLetter(current)) {//hvis current ikke er til venstre for ':' OG current er et bogstav:
                 buildRule.append(current); //current appendes til buildRule der er en stringBuilder
                 currRule += String.valueOf(buildRule); //currRule får buildRules string //currRule får strengen fra buildRule
             }
@@ -56,6 +57,7 @@ public class Grammatik {
         char[] primitives = new char[]{'[',']','+','-'};
         for (char c :primitives) {
             Rule primitive = new Rule(c);
+            ruleset.add(primitive);
         }
     }
 
@@ -67,8 +69,5 @@ public class Grammatik {
         return axiom;
     }
 }
-
-
-
 
 
