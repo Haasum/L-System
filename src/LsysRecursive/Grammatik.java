@@ -16,6 +16,7 @@ public class Grammatik {
 
     public Grammatik(String textFile) {
         this.textFile = textFile + '.';
+        System.out.println("textfile is " + textFile);
         readRules();
         addPrimitives();
     }

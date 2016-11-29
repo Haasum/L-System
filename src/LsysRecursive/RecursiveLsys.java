@@ -14,6 +14,7 @@ public class RecursiveLsys {
 
     public RecursiveLsys(Grammatik grammatik) {
         this.grammatik = grammatik;
+        System.out.println("ruleset is " + ruleset);
         this.ruleset = grammatik.ruleset;
         treeLsys1 += axiom1;
         expand(treeLsys1, genNo1);

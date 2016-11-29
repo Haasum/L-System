@@ -11,7 +11,7 @@ import java.util.*;
  */
 public class txt {
 
-    public String inputFromTxt = "A:ABA,A:BCB,C:ACA,";
+    public String inputFromTxt = "A:ABA,B:BCB,C:ACA,";
     public String endInput;
     public StringBuilder endOutput= new StringBuilder();
     public String txtInput;
@@ -75,7 +75,6 @@ public class txt {
         for (int i = 0; i < inputFromTxt.length() - 1; i++) {
             char current = inputFromTxt.charAt(i);
             if (inputFromTxt.charAt(i + 1) == ':') {
-                System.out.println(current);
                 stack.add(current);
 
                 StringBuilder testBuild = new StringBuilder();
@@ -94,28 +93,28 @@ public class txt {
             makerandom(stack.get(0), stack.get(1), stack.get(1), 0,0);
         }
         else if (stack.get(0) == stack.get(1)) {
-            System.out.println("stack 0 & 1 is same");
+            System.out.println("letter no 0 & 1 is same");
             endOutput.append(stack.get(2));
             endOutput.append(':');
             endOutput.append(myMap.get(2));
             makerandom(stack.get(0), stack.get(1), '*', 0, 1);
         }
         else if (stack.get(0) == stack.get(2)) {
-            System.out.println("stack 0 & 2 is same");
+            System.out.println("letter no 0 & 2 is same");
             endOutput.append(stack.get(1));
             endOutput.append(':');
             endOutput.append(myMap.get(1));
             makerandom(stack.get(0), stack.get(2), '*', 0, 2);
         }
         else if (stack.get(1) == stack.get(2)) {
-            System.out.println("stack 1 & 2 is same");
+            System.out.println("letter no 1 & 2 is same");
             endOutput.append(stack.get(0));
             endOutput.append(':');
             endOutput.append(myMap.get(0));
             makerandom(stack.get(1), stack.get(2), '*', 1, 2);
         }
         else {
-            System.out.println("none of the stacks are the same");
+            System.out.println("none of the letters are the same");
             txtInput = inputFromTxt;
             System.out.println("the end output is " + txtInput);
         }
@@ -126,7 +125,6 @@ public class txt {
         if (c == '*') {
             endOutput.append(',');
             endOutput.append(a);
-            System.out.println("2 letters are the same");
             for (int j = 0; j < 10; j++) {
                 Random rand = new Random();
                 int x = rand.nextInt(2);
