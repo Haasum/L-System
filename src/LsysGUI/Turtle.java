@@ -140,6 +140,8 @@ public class Turtle extends JPanel {
                     {
                        g2d.translate(0,testHeight);
                     }
+
+                    repaint();
                 }
 
 

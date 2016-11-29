@@ -40,6 +40,7 @@ public class GUI extends JFrame implements PropertyChangeListener {
 
         drawMainPanel();
         cursor();
+
     }
 
 
@@ -65,7 +66,6 @@ public class GUI extends JFrame implements PropertyChangeListener {
         if (name == "g") {
             System.out.println("grow tree");
             drawString = "F[-F[-F[+F[+F][-F]][-F[+F][-F]]][+F[+F][-F]]][[+F[-F[A]][+F[A]]]";
-            System.out.println(drawString);
             Turtle turtle = new Turtle(grammatik, lsys, drawString);
             repaint();
         }
