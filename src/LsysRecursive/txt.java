@@ -89,34 +89,34 @@ public class txt {
         }
 
         if (stack.get(0) == stack.get(1) && stack.get(0) == stack.get(2)) {
-            System.out.println("all stacks are the same");
+          //  System.out.println("all stacks are the same");
             makerandom(stack.get(0), stack.get(1), stack.get(1), 0,0);
         }
         else if (stack.get(0) == stack.get(1)) {
-            System.out.println("letter no 0 & 1 is same");
+          //  System.out.println("letter no 0 & 1 is same");
             endOutput.append(stack.get(2));
             endOutput.append(':');
             endOutput.append(myMap.get(2));
             makerandom(stack.get(0), stack.get(1), '*', 0, 1);
         }
         else if (stack.get(0) == stack.get(2)) {
-            System.out.println("letter no 0 & 2 is same");
+           // System.out.println("letter no 0 & 2 is same");
             endOutput.append(stack.get(1));
             endOutput.append(':');
             endOutput.append(myMap.get(1));
             makerandom(stack.get(0), stack.get(2), '*', 0, 2);
         }
         else if (stack.get(1) == stack.get(2)) {
-            System.out.println("letter no 1 & 2 is same");
+         //   System.out.println("letter no 1 & 2 is same");
             endOutput.append(stack.get(0));
             endOutput.append(':');
             endOutput.append(myMap.get(0));
             makerandom(stack.get(1), stack.get(2), '*', 1, 2);
         }
         else {
-            System.out.println("none of the letters are the same");
+          //  System.out.println("none of the letters are the same");
             txtInput = inputFromTxt;
-            System.out.println("the end output is " + txtInput);
+        //    System.out.println("the end output is " + txtInput);
         }
 
     }
@@ -143,7 +143,7 @@ public class txt {
     }
         endOutput.append(':' + endInput);
         txtInput = String.valueOf(endOutput);
-        System.out.println("the end output is " + txtInput);
+    //    System.out.println("the end output is " + txtInput);
     }
 
 

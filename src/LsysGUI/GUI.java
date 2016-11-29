@@ -5,13 +5,15 @@ import LsysRecursive.RecursiveLsys;
 
 import javax.swing.*;
 import java.awt.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 
 /**
  * GUI står for at lave vores interface, vinduet som skal tegnes på af turtlen osv.
  *
  */
-public class GUI extends JFrame {
+public class GUI extends JFrame implements PropertyChangeListener{
 
     Turtle turtle;
     Grammatik grammatik;
@@ -21,7 +23,10 @@ public class GUI extends JFrame {
 
     public GUI() {
 
+
+
         Turtle turtle = new Turtle(grammatik, lsys);
+        Brugerinput brugerinput = new Brugerinput(mainPanel);
 
 
         setTitle("Growing Tree");
@@ -34,6 +39,7 @@ public class GUI extends JFrame {
         drawMainPanel();
         cursor();
 
+
     }
 
     public void drawMainPanel() {
@@ -43,6 +49,8 @@ public class GUI extends JFrame {
         mainPanel.setVisible(true);
         mainPanel.setBackground(null);
         mainPanel.setLayout(null);
+        mainPanel.addPropertyChangeListener(this);
+
     }
 
     public void cursor() {
@@ -50,6 +58,19 @@ public class GUI extends JFrame {
 
 
     }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+            String propertyName = evt.getPropertyName();
+            switch (propertyName) {
+                case "grow":
+                    System.out.println("start growing");
+                    break;
+                default:
+                    break;
+            }
+        }
+
 }
 
 

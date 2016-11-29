@@ -28,7 +28,7 @@ public class Grammatik {
             char current = textFile.charAt(i);
             if (current == ':') {
                 currentLetter = textFile.charAt(i - 1); //her tilføjes char til venstre for ':' til currentLetter (=ruleLetter)
-                System.out.println("regel er " + currentLetter);
+                //System.out.println("regel er " + currentLetter);
             }
             if (current == ',') { //hver gang current er ',' starter sendRules metoden, og buildRule nulstilles
                 addRule();

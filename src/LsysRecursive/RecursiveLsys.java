@@ -14,7 +14,7 @@ public class RecursiveLsys {
 
     public RecursiveLsys(Grammatik grammatik) {
         this.grammatik = grammatik;
-        System.out.println("ruleset is " + ruleset);
+      //  System.out.println("ruleset is " + ruleset);
         this.ruleset = grammatik.ruleset;
         treeLsys1 += axiom1;
         expand(treeLsys1, genNo1);
@@ -23,7 +23,7 @@ public class RecursiveLsys {
     public String expand(String s, int genNo1) {
         String next = "";
         if (genNo1 == 0) {
-            System.out.println("done");
+         //   System.out.println("done");
             return s;
         }
 
@@ -40,7 +40,7 @@ public class RecursiveLsys {
 
             }
         }
-        System.out.println("generation: " + genNo1 + "current alphabet " + next);
+     //   System.out.println("generation: " + genNo1 + "current alphabet " + next);
         return next;
     }
     public String checkLetterInAlpha(char c) {
