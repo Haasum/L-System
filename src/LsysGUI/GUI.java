@@ -13,20 +13,21 @@ import java.beans.PropertyChangeListener;
  * GUI står for at lave vores interface, vinduet som skal tegnes på af turtlen osv.
  *
  */
-public class GUI extends JFrame implements PropertyChangeListener{
+public class GUI extends JFrame implements PropertyChangeListener {
 
     Turtle turtle;
     Grammatik grammatik;
     RecursiveLsys lsys;
     static JPanel mainPanel = new JPanel();
     ImageIcon cursorPic = new ImageIcon("C:\\Users\\naja\\IdeaProjects\\GITHUB\\Proto2\\src\\LsysGUI\\kande.png"); //cursor Path
+    String drawString = "";
 
     public GUI() {
 
 
 
-        Turtle turtle = new Turtle(grammatik, lsys);
-        Brugerinput brugerinput = new Brugerinput(mainPanel);
+        Turtle turtle = new Turtle(grammatik, lsys, drawString);
+        Brugerinput brugerinput = new Brugerinput(mainPanel, this);
 
 
         setTitle("Growing Tree");
@@ -40,6 +41,7 @@ public class GUI extends JFrame implements PropertyChangeListener{
         cursor();
 
 
+
     }
 
     public void drawMainPanel() {
@@ -49,8 +51,7 @@ public class GUI extends JFrame implements PropertyChangeListener{
         mainPanel.setVisible(true);
         mainPanel.setBackground(null);
         mainPanel.setLayout(null);
-        mainPanel.addPropertyChangeListener(this);
-
+        addPropertyChangeListener(this);
     }
 
     public void cursor() {
@@ -61,15 +62,15 @@ public class GUI extends JFrame implements PropertyChangeListener{
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-            String propertyName = evt.getPropertyName();
-            switch (propertyName) {
-                case "grow":
-                    System.out.println("start growing");
-                    break;
-                default:
-                    break;
-            }
+        String name = evt.getPropertyName();
+        if (name == "g") {
+            System.out.println("grow tree");
+            drawString = "F[-F[-F[+F[+F][-F]][-F[+F][-F]]][+F[+F][-F]]][[+F[-F[A]][+F[A]]]";
+
         }
+        else System.out.println("none");
+    }
+
 
 }
 

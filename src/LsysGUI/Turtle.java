@@ -30,11 +30,13 @@ public class Turtle extends JPanel {
     boolean btnBo1 = false;
     boolean btnBo2 = false;
 
-    String drawThis = "F[-F[-F[+F[+F][-F]][-F[+F][-F]]][+F[+F][-F]]][[+F[-F[A]][+F[A]]]";
+    String drawThis;
+    //String drawThis = "F[-F[-F[+F[+F][-F]][-F[+F][-F]]][+F[+F][-F]]][[+F[-F[A]][+F[A]]]";
 
-    public Turtle (Grammatik grammatik, RecursiveLsys lsys) {
+    public Turtle (Grammatik grammatik, RecursiveLsys lsys, String draw) {
         this.grammatik = grammatik;
         makeTestPanel();
+        drawThis = draw;
 
 
     }
