@@ -34,14 +34,16 @@ public class Turtle extends JPanel {
     //String drawThis = "F[-F[-F[+F[+F][-F]][-F[+F][-F]]][+F[+F][-F]]][[+F[-F[A]][+F[A]]]";
 
     public Turtle (Grammatik grammatik, RecursiveLsys lsys, String draw) {
+
         this.grammatik = grammatik;
-        makeTestPanel();
         drawThis = draw;
+        makeTestPanel();
 
 
     }
 
-    private void makeTestPanel() {
+    public void makeTestPanel() {
+
         testPanel = new JPanel() {
 
             public void paintComponent(Graphics g) { //TODO: få så meget som muligt ud af paintcomponent metoden
@@ -76,6 +78,7 @@ public class Turtle extends JPanel {
                 }
 
                 g2d.setTransform(originalTrans);
+
 
                 for (int i = 0; i < drawThis.length(); i++) {
                     char currentCheck = drawThis.charAt(i);
