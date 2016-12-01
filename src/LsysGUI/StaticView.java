@@ -32,7 +32,7 @@ public class StaticView extends JFrame implements PropertyChangeListener {
 this.lsys = lsys;
 
 
-        Texture texture = new Texture();
+        //Texture texture = new Texture(); //TODO: texture skal ikke loades lige nu
 
 
         setTitle("Growing Tree");
