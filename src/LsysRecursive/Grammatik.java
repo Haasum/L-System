@@ -10,7 +10,6 @@ public class Grammatik {
     String textFile;
     String currRule = "";
     Rule rule;
-    char axiom = 'A';
 
     public Grammatik(String textFile) {
         this.textFile = textFile + '.';
@@ -18,9 +17,19 @@ public class Grammatik {
     }
     public void initGrammatik(){
         ruleset = new ArrayList<>();
+        addAxiom();
         addPrimitives();
         readRules();
     }
+
+    private void addAxiom() {
+
+        char axiom = 'K';
+        String axiomRule = "K[+A][-A]";
+        Rule axRule = new Rule(axiom, axiomRule);
+        ruleset.add(axRule);
+    }
+
     public void readRules() { //læser reglerne og deler dem op i i rule-letter og rule
         for (int i = 0; i < textFile.length()-1; i++) { //kører i textfilens længde
             StringBuilder buildRule = new StringBuilder();
@@ -45,7 +54,7 @@ public class Grammatik {
     private void addRule() { //reglerne sendes. det er også her de skal gemmes
         rule = new Rule(currentLetter, currRule);
         ruleset.add(rule);
-        System.out.println("ruleset er " + ruleset.get(4).getRegel());
+        System.out.println("ruleset er " + ruleset.get(5).getRegel());
         currRule = ""; //currRule nulstilles
     }
     public void addPrimitives(){
@@ -57,9 +66,6 @@ public class Grammatik {
     }
     public ArrayList<Rule> getRuleset(){
         return ruleset;
-    }
-    public char getAxiom() {
-        return axiom;
     }
 
 }

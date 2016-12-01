@@ -1,30 +1,37 @@
 package LsysGUI;
 
+import LsysRecursive.Grammatik;
+import LsysRecursive.RecursiveLsys;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import static LsysGUI.Turtle.middleX;
-import static LsysGUI.Turtle.screenHeight;
-
 /**
  * Prototype 2s brugerinput skal kun være et klik fra musen der aktivere lsystemet og tegner det.
  * Der bliver bliver fokuseret mere på et advanceret indput når vi kommer til prototype 3 (sliders, knapper osv)
  */
 
-public class Brugerinput implements MouseListener, ActionListener {
+public class Brugerinput implements MouseListener, ActionListener{
 
     StaticView staticView;
+    JPanel mainPanel;
+    RecursiveLsys lsys;
+    Grammatik grammatik;
 
-    public Brugerinput(JPanel mainPanel, StaticView staticView) {
+    public Brugerinput(JPanel mainPanel, RecursiveLsys lsys) {
         System.out.println("brugerinput kører");
-        this.staticView = staticView;
+        this.lsys = lsys;
+
+        this.mainPanel = mainPanel;
 
         mainPanel.addMouseListener(this);
 
     }
+
+
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -33,18 +40,7 @@ public class Brugerinput implements MouseListener, ActionListener {
         int x = e.getX();
         int y = e.getY();
 
-
-        // g2d.fillOval(middleX-200,screenHeight-100,400,200);
-        /*
-        middleX-200 - middleX + 200
-        screenHeight-100 - screenHeight +100
-        */
-
-        if ((x > middleX - 200 && x < middleX + 200) && (y > screenHeight - 100 && y < screenHeight + 100)) {
-            System.out.println("start turtle");
-            staticView.firePropertyChange("g", 0, 1);
-
-        }
+        System.out.println("mouseClicked");
 
     }
 

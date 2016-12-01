@@ -21,6 +21,7 @@ public class Turtle extends JPanel {
     Grammatik grammatik;
     JPanel testPanel;
     JButton terminalBtn;
+    RecursiveLsys lsys;
     int testHeight;
     int btnPressed;
     ArrayList<AffineTransform> stack = new ArrayList<AffineTransform>();
@@ -33,9 +34,9 @@ public class Turtle extends JPanel {
     static int screenHeight = (int) screenSize.getHeight();
     GeneralPath branchShape = new GeneralPath();
     GeneralPath logShape = new GeneralPath();
-    Color greenCol = new Color(34,139,34);
     int counter;
     int test2;
+    int j;
 
     ButtonNodeActionListener buttonListener;
 
@@ -43,13 +44,16 @@ public class Turtle extends JPanel {
 
     String drawThis;
 
-    public Turtle(Grammatik grammatik, RecursiveLsys lsys, String draw) {
+    public Turtle(String draw, RecursiveLsys lsys) {
 
-        this.grammatik = grammatik;
-        drawThis = "K[+F[-A][+A]][-F[+A][-A]]";
-        drawThis = "K[+F[+F[+F[+F[+A][-A]][-F[+A][-A]]][-F[+F[+A][-A]][-F[+A][-A]]]][-F[+F[+F[+A][-A]][-F[+A][-A]]][-F[+F[+A][-A]][-F[+A][-A]]]]][-F[+F[+F[+F[+A][-A]][-F[+A][-A]]][-F[+F[+A][-A]][-F[+A][-A]]]][-F[+F[+F[+A][-A]][-F[+A][-A]]][-F[+F[+A][-A]][-F[+A][-A]]]]]";
+        this.lsys = lsys;
+        this.drawThis = draw;
+       // this.drawThis = "F+F--F+F";
+       // drawThis = "K[+F[+F[+F[+F[+A][-A]][-F[+A][-A]]][-F[+F[+A][-A]][-F[+A][-A]]]][-F[+F[+F[+A][-A]][-F[+A][-A]]][-F[+F[+A][-A]][-F[+A][-A]]]]][-F[+F[+F[+F[+A][-A]][-F[+A][-A]]][-F[+F[+A][-A]][-F[+A][-A]]]][-F[+F[+F[+A][-A]][-F[+A][-A]]][-F[+F[+A][-A]][-F[+A][-A]]]]]";
+
         makeTestPanel();
 
+        System.out.println("test tree" + lsys.getTree());
     }
 
     public void makeTestPanel() {
@@ -75,15 +79,17 @@ public class Turtle extends JPanel {
                 g2d.setTransform(originalTrans);
 
 
-                for (int i = 0; i < drawThis.length(); i++) {
-                    char currentCheck = drawThis.charAt(i);
+                for (int i = 0; i < lsys.getTree().length()-1; i++) {
+
+            //    for (int i = 0; i < drawThis.length(); i++) {
+                    char currentCheck = lsys.getTree().charAt(i);
 
                     switch (currentCheck) { //TODO: skal ikke være switch case. den skal gemmenløbe regelsæt istedet for stringinputtet
                         case 'A':
                            interpretTerminal(g2d);
                             break;
                         case 'F':
-                            growBranch(g2d, drawThis.charAt(i + 1));
+                            growBranch(g2d, lsys.getTree().charAt(i + 1));
                             break;
                         case 'K':
                             makeLog(g2d);
@@ -118,6 +124,8 @@ public class Turtle extends JPanel {
 
         };
 
+
+
         testPanel.setSize(screenSize);
         testPanel.setVisible(true);
         testPanel.setBackground(new Color(99, 125, 150));
@@ -143,7 +151,6 @@ public class Turtle extends JPanel {
     private void makeBackground(Graphics2D g2d) {
 
         g2d.drawImage(backImg, 0, -75, this); //backgroundIMG
-
         g2d.setPaint(Texture.soilTex); //sets the soil texture
         makeGroundObject(g2d);
     }
@@ -153,8 +160,8 @@ public class Turtle extends JPanel {
         g2d.setPaint(Texture.barkTex);
         final double points[][]= {
 
-                { -2, -200}, {2, -200}, //bund
-                { 6 ,-20}, { -6,-20 } //bund
+                { -2, -250}, {2, -250}, //top
+                { 6 ,-50}, { -6,-50 } //bund
         };
 
         logShape.moveTo(points[0][0], points[0][1]);
@@ -164,7 +171,7 @@ public class Turtle extends JPanel {
         logShape.closePath();
         g2d.fill(logShape);
 
-        g2d.translate(0,-200);
+        g2d.translate(0,-250);
 
     }
 
@@ -180,9 +187,13 @@ public class Turtle extends JPanel {
         stack.remove(stack.size()-1);
     }
 
-    private void rotateLeft(Graphics2D g2d) { g2d.rotate(Math.PI/7); }
+    private void rotateLeft(Graphics2D g2d) {
+        j++;
 
-    private void rotateRight(Graphics2D g2d) { g2d.rotate(-Math.PI/7); }
+
+        g2d.rotate(Math.PI/6); }
+
+    private void rotateRight(Graphics2D g2d) { g2d.rotate(-Math.PI/6); }
 
     private void growBranch(Graphics2D g2d, char a) {
         testHeight = -50;

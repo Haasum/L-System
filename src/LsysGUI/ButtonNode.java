@@ -9,6 +9,7 @@ import java.awt.geom.AffineTransform;
  */
 public class ButtonNode {
 
+    Color greenCol = new Color(34,139,34);
     JButton terminalBtn;
     ButtonNodeActionListener buttonListener;
 
@@ -21,7 +22,7 @@ public class ButtonNode {
         terminalBtn = new JButton();
 
         terminalBtn.setBounds(buttonX-buttonsize/2,buttonY-buttonsize,buttonsize,buttonsize);
-        terminalBtn.setBackground(Color.red);
+        terminalBtn.setBackground(Color.MAGENTA);
         buttonListener = new ButtonNodeActionListener();
         terminalBtn.addActionListener(buttonListener);
 

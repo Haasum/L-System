@@ -1,11 +1,13 @@
 package com.company;
 
+import LsysGUI.Brugerinput;
 import LsysGUI.StaticView;
+import LsysGUI.Turtle;
 import LsysRecursive.Grammatik;
 import LsysRecursive.RecursiveLsys;
 import LsysRecursive.txt;
 
-import java.math.BigDecimal;
+import static LsysGUI.StaticView.mainPanel;
 
 /**
  * Created by nanna on 25-10-2016.
@@ -17,7 +19,10 @@ public class Controller {
      */
 
     String tree;
-    BigDecimal tree2;
+    Turtle turtle;
+    StaticView staticView;
+    Brugerinput brugerinput;
+
 
     public Controller(){
 
@@ -27,18 +32,20 @@ public class Controller {
         String txtFile = test.getTxtInput();
 
         Grammatik grammatik = new Grammatik(txtFile);
-        RecursiveLsys lsys = new RecursiveLsys(grammatik);
+        RecursiveLsys lsys = new RecursiveLsys(grammatik,"K",1);
         tree = lsys.getTree();
         System.out.println("Dette er træet, wuhuuuuuu "+tree);
 
-        StaticView staticView = new StaticView();
-
-
+        staticView = new StaticView(lsys);
+        turtle = new Turtle("K", lsys);
+        brugerinput = new Brugerinput(mainPanel, lsys);
 
 
 
 
     }
+
+
 
 
 }
