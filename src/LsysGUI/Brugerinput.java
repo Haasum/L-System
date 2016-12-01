@@ -5,11 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
-import static LsysGUI.GUI.mainPanel;
-import static javafx.event.Event.fireEvent;
+import static LsysGUI.Turtle.middleX;
+import static LsysGUI.Turtle.screenHeight;
 
 /**
  * Prototype 2s brugerinput skal kun være et klik fra musen der aktivere lsystemet og tegner det.
@@ -18,11 +16,11 @@ import static javafx.event.Event.fireEvent;
 
 public class Brugerinput implements MouseListener, ActionListener{
 
-GUI gui;
+StaticView staticView;
 
-    public Brugerinput(JPanel mainPanel, GUI gui) {
+    public Brugerinput(JPanel mainPanel, StaticView staticView) {
         System.out.println("brugerinput kører");
-        this.gui = gui;
+        this.staticView = staticView;
 
         mainPanel.addMouseListener(this);
 
@@ -38,9 +36,16 @@ GUI gui;
         int x = e.getX();
         int y = e.getY();
 
-        if ((x > 275 && x < 325) && (y > 550 && y < 600)) {
+
+       // g2d.fillOval(middleX-200,screenHeight-100,400,200);
+        /*
+        middleX-200 - middleX + 200
+        screenHeight-100 - screenHeight +100
+        */
+
+        if ((x > middleX-200 && x < middleX+200) && (y > screenHeight-100 && y < screenHeight+100)) {
             System.out.println("start turtle");
-            gui.firePropertyChange("g",0,1);
+            staticView.firePropertyChange("g",0,1);
 
         }
 

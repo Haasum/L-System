@@ -2,7 +2,6 @@
  * Gammatik står for at parse hvad der står i tekstfilen som kommer fra txt.java
  * vores readRules method læser bogstavet inden vores kolon og reglener efter kolon som kan læses senere.
  */
-
 package LsysRecursive;
 import java.util.ArrayList;
 public class Grammatik {
@@ -21,7 +20,6 @@ public class Grammatik {
         ruleset = new ArrayList<>();
         addPrimitives();
         readRules();
-
     }
     public void readRules() { //læser reglerne og deler dem op i i rule-letter og rule
         for (int i = 0; i < textFile.length()-1; i++) { //kører i textfilens længde
@@ -35,39 +33,33 @@ public class Grammatik {
                 addRule();
                 buildRule.setLength(0);
             }
-            if (textFile.charAt(i+1) != ':' && Character.isLetter(current)) {//hvis current ikke er til venstre for ':' OG current er et bogstav:
+            else if (textFile.charAt(i+1) != ':' && current != ':'){ //&& Character.isLetter(current)) {//hvis current ikke er til venstre for ':' OG current er et bogstav:
                 buildRule.append(current); //current appendes til buildRule der er en stringBuilder
                 currRule += String.valueOf(buildRule); //currRule får buildRules string //currRule får strengen fra buildRule
             }
-
             else if (current == '.') { // '.' stopper metoden
                 return;
             }
         }
     }
-
     private void addRule() { //reglerne sendes. det er også her de skal gemmes
-        //TODO: her skal array af current letter
         rule = new Rule(currentLetter, currRule);
         ruleset.add(rule);
+        System.out.println("ruleset er " + ruleset.get(4).getRegel());
         currRule = ""; //currRule nulstilles
     }
-
-    public void addPrimitives(){ //TODO: skal impleme
+    public void addPrimitives(){
         char[] primitives = new char[]{'[',']','+','-'};
         for (char c :primitives) {
             Rule primitive = new Rule(c);
             ruleset.add(primitive);
         }
     }
-
     public ArrayList<Rule> getRuleset(){
         return ruleset;
     }
-
     public char getAxiom() {
         return axiom;
     }
+
 }
-
-
