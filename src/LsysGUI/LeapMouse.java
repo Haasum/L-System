@@ -1,16 +1,7 @@
-package LsysGUI;
-
-import com.leapmotion.leap.Controller;
-import com.leapmotion.leap.Gesture;
-import com.sun.xml.internal.bind.v2.TODO;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+//package LsysGUI;
 
 /**
- * Created by Lucas on 01-12-2016.
- */
+
 public class LeapMouse {
 
     public static void main(String[] args) throws IOException {
@@ -72,4 +63,4 @@ public class LeapMouse {
 
 
     }
-}
+ **/

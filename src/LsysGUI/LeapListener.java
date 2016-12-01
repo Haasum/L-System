@@ -1,3 +1,5 @@
+/*
+
 package LsysGUI;
 import com.leapmotion.leap.Controller;
 import com.leapmotion.leap.FingerList;
@@ -12,9 +14,8 @@ import java.awt.Robot;
 
 
 
-/**
- * Created by Lucas on 01-12-2016.
- */
+/* Created by Lucas on 01-12-2016.
+
 public class LeapListener extends Listener {
 
     //True for Debugging
@@ -188,3 +189,4 @@ public class LeapListener extends Listener {
             USE_CALIBRATED_SCREEN = d;
         }
     }
+*/

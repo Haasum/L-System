@@ -28,7 +28,7 @@ public class StaticView extends JFrame implements PropertyChangeListener {
     int i = 3;
 
 
-    public StaticView(RecursiveLsys lsys) {
+    public StaticView(final RecursiveLsys lsys) {
 this.lsys = lsys;
 
 
