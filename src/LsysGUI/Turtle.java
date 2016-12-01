@@ -5,8 +5,6 @@ import LsysRecursive.RecursiveLsys;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
 import java.util.ArrayList;
@@ -15,9 +13,7 @@ import java.util.Map;
 
 import static LsysGUI.StaticView.mainPanel;
 import static LsysGUI.StaticView.screenSize;
-import static LsysGUI.Texture.backImg;
-import static LsysGUI.Texture.leafImg;
-import static LsysGUI.Texture.leafImg2;
+import static LsysGUI.Texture.*;
 
 
 public class Turtle extends JPanel {
@@ -28,7 +24,6 @@ public class Turtle extends JPanel {
     int testHeight;
     int btnPressed;
     ArrayList<AffineTransform> stack = new ArrayList<AffineTransform>();
-    ArrayList <AffineTransform> oldTrans = new ArrayList<>();
     int test = 0;
     Map<Integer,AffineTransform> terminalProp = new HashMap<Integer,AffineTransform>();
     boolean btnBo1 = false;
@@ -42,19 +37,18 @@ public class Turtle extends JPanel {
     int counter;
     int test2;
 
-    AffineTransform originalTrans = AffineTransform.getTranslateInstance(middleX,screenHeight-250);
+    ButtonNodeActionListener buttonListener;
+
+    AffineTransform originalTrans = AffineTransform.getTranslateInstance(middleX,screenHeight-60);
 
     String drawThis;
 
     public Turtle(Grammatik grammatik, RecursiveLsys lsys, String draw) {
 
-
-
-        System.out.println("start turtle");
         this.grammatik = grammatik;
-        drawThis = draw;
+        drawThis = "K[+F[-A][+A]][-F[+A][-A]]";
+        drawThis = "K[+F[+F[+F[+F[+A][-A]][-F[+A][-A]]][-F[+F[+A][-A]][-F[+A][-A]]]][-F[+F[+F[+A][-A]][-F[+A][-A]]][-F[+F[+A][-A]][-F[+A][-A]]]]][-F[+F[+F[+F[+A][-A]][-F[+A][-A]]][-F[+F[+A][-A]][-F[+A][-A]]]][-F[+F[+F[+A][-A]][-F[+A][-A]]][-F[+F[+A][-A]][-F[+A][-A]]]]]";
         makeTestPanel();
-
 
     }
 
@@ -64,40 +58,14 @@ public class Turtle extends JPanel {
 
             public void paintComponent(Graphics g) { //TODO: få så meget som muligt ud af paintcomponent metoden
 
-
                 super.paintComponent(g);
                 Graphics2D g2d = (Graphics2D) g.create();
 
-                g2d.drawImage(backImg, 0, -75, this); //backgroundIMG
-
-                g2d.setPaint(Texture.soilTex); //sets the soil texture
-                makeGroundObject(g2d);
-
-                g2d.setPaint(Texture.barkTex);
-                makeLog(g2d);
-
-
-                //branch test
-               // makeBranch(g2d);
-               // g2d.fill(branchShape);
-
-
-                g2d.setTransform(originalTrans);
-
-
+                makeBackground(g2d);
 
                 if (btnBo1 == true) {
                     g2d.setTransform(terminalProp.get(1));
 
-                    rotateRight(g2d);
-                    growBranch(g2d, '*');
-                    rotateLeft(g2d);
-                    growBranch(g2d, '*');
-                }
-
-                if (btnBo2 == true) {
-
-                    g2d.setTransform(terminalProp.get(2));
                     rotateRight(g2d);
                     growBranch(g2d, '*');
                     rotateLeft(g2d);
@@ -110,12 +78,15 @@ public class Turtle extends JPanel {
                 for (int i = 0; i < drawThis.length(); i++) {
                     char currentCheck = drawThis.charAt(i);
 
-                    switch (currentCheck) {
+                    switch (currentCheck) { //TODO: skal ikke være switch case. den skal gemmenløbe regelsæt istedet for stringinputtet
                         case 'A':
-                            savePoint(g2d);
+                           interpretTerminal(g2d);
                             break;
                         case 'F':
                             growBranch(g2d, drawThis.charAt(i + 1));
+                            break;
+                        case 'K':
+                            makeLog(g2d);
                             break;
                         case '+':
                             rotateRight(g2d);
@@ -136,84 +107,14 @@ public class Turtle extends JPanel {
 
 
                 }
-
+                repaint();
             }
 
 
-            private void push(Graphics2D g2d) {
-                stack.add(g2d.getTransform());
-
-            }
-
-            private void pop(Graphics2D g2d) {
-                AffineTransform t = stack.get(stack.size()-1);
-                g2d.setTransform(t);
-                stack.remove(stack.size()-1);
-            }
-
-            private void rotateLeft(Graphics2D g2d) {
-                g2d.rotate(Math.PI/7);
-            }
-
-            private void rotateRight(Graphics2D g2d) { g2d.rotate(-Math.PI/7); }
-
-            private void growBranch(Graphics2D g2d, char a) {
-                testHeight = -50;
-                counter++;
-
-
-                g2d.setStroke(new BasicStroke(4.0f));
-                g2d.drawLine(0,0,0, testHeight);
-              //  drawLeafs(g2d); blade TEST
-
-
-
-                    if (a == ']' || a == '[')
-                    {
-                       g2d.translate(0,testHeight);
-                    }
-
-
-                }
 
 
 
 
-            private void savePoint(Graphics2D g2d) {
-                test++;
-
-                AffineTransform currentT = g2d.getTransform();//saves the currenttransform to an array of old transforms
-                int buttonX = (int) currentT.getTranslateX();
-                int buttonY = (int) currentT.getTranslateY();
-                int buttonsize = 10;
-
-                terminalBtn = new JButton(String.valueOf(test));
-                testPanel.add(terminalBtn);
-                terminalBtn.setBounds(buttonX-buttonsize/2,buttonY-buttonsize,buttonsize,buttonsize);
-                terminalBtn.setBackground(greenCol);
-               //
-                terminalBtn.addActionListener(new ActionListener() {
-                    @Override
-                        public void actionPerformed(ActionEvent e) { //TODO: skal i brugerindput klasse
-                        btnPressed = Integer.parseInt(e.getActionCommand());
-                        terminalProp.put(btnPressed, currentT);
-                        if (btnPressed == 1) {
-                            btnBo1 = true; //TODO: btnpressed skal hente nodes, og så tegnes der en anden streng (med udvidelser)
-                            //skal egentlig bare erstatte de steder der er et A med x [+F][-F]
-                        }
-                        if (btnPressed == 2) {
-                            btnBo2 = true; //TODO: btnpressed skal hente nodes, og så tegnes der en anden streng (med udvidelser)
-                        }
-
-                        //TODO: dette er midlertidigt. Når button er pressed skal Lsys udvides (med nodes). og så tegner paincomponent igen, men de nye udvidelser
-                    }
-
-                });
-
-                oldTrans.add(currentT);
-                repaint(); //repaint skal ligge her, for at den tegner når turtle kaldes 2. gang (ved tryk på jord
-
-            }
 
         };
 
@@ -228,28 +129,82 @@ public class Turtle extends JPanel {
 
     }
 
+    private void interpretTerminal(Graphics2D g2d) { //TODO: lav button betode, så A både kalder en savepoint og en knap metode
+        AffineTransform currentT = g2d.getTransform();
+
+
+        ButtonNode buttonNode = new ButtonNode(currentT);
+
+        testPanel.add(buttonNode.terminalBtn);
+        buttonListener = new ButtonNodeActionListener();
+
+    }
+
+    private void makeBackground(Graphics2D g2d) {
+
+        g2d.drawImage(backImg, 0, -75, this); //backgroundIMG
+
+        g2d.setPaint(Texture.soilTex); //sets the soil texture
+        makeGroundObject(g2d);
+    }
+
     private void makeLog(Graphics2D g2d) { //skal tilsluttes translate. dvs punkterne skal opdateres og metoden skal kaldes efter translate
 //TODO: skal gøres lækker
+        g2d.setPaint(Texture.barkTex);
         final double points[][]= {
 
-                { middleX+2, screenHeight-250 }, { middleX-2, screenHeight-250 }, //top
-               // {200,120},{210,122}, {209,126}, {200,128}, //en knop på træet
-               // {200,215},{208,217}, {211,230}, {201,234},
-               // {200,240},{208,242}, {211,252}, {201,253}, //en knop på træet
-
-                { middleX-10, screenHeight-100}, { middleX+10, screenHeight-100} //bund
-               // ,{ 191, 100 } //tilbage til toppen
+                { -2, -200}, {2, -200}, //bund
+                { 6 ,-20}, { -6,-20 } //bund
         };
 
         logShape.moveTo(points[0][0], points[0][1]);
-
         for (int k = 1; k < points.length; k++)
             logShape.lineTo(points[k][0], points[k][1]);
 
         logShape.closePath();
         g2d.fill(logShape);
 
+        g2d.translate(0,-200);
+
     }
+
+
+    private void push(Graphics2D g2d) {
+        stack.add(g2d.getTransform());
+
+    }
+
+    private void pop(Graphics2D g2d) {
+        AffineTransform t = stack.get(stack.size()-1);
+        g2d.setTransform(t);
+        stack.remove(stack.size()-1);
+    }
+
+    private void rotateLeft(Graphics2D g2d) { g2d.rotate(Math.PI/7); }
+
+    private void rotateRight(Graphics2D g2d) { g2d.rotate(-Math.PI/7); }
+
+    private void growBranch(Graphics2D g2d, char a) {
+        testHeight = -50;
+        counter++;
+
+
+        g2d.setStroke(new BasicStroke(4.0f));
+        g2d.drawLine(0,0,0, testHeight);
+        //  drawLeafs(g2d); blade TEST
+
+
+        if (a == ']' || a == '[')
+        {
+            g2d.translate(0,testHeight);
+        }
+
+
+    }
+
+
+
+
 
 
     private void drawLeafs(Graphics2D g2d) {
@@ -288,7 +243,11 @@ public class Turtle extends JPanel {
 
     private void makeGroundObject(Graphics2D g2d) {
        g2d.fillOval(middleX-200,screenHeight-120,400,200);
-    }
+    } //TODO: skal være i static og blive markeret når musen er i nærheden
+
+
+
+
 
 
 

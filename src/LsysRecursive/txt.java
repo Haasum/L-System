@@ -5,7 +5,7 @@ package LsysRecursive;
  */
 public class txt {
 
-    public String inputFromTxt = "A:F[+A][-A],K:BCB,C:ACA,";
+    public String inputFromTxt = "A:F[+A][-A],A:F[+A][-A],K:BCB,C:ACA,";
     public String endInput;
     public StringBuilder endOutput= new StringBuilder();
     public String txtInput;

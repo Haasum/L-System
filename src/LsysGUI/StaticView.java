@@ -80,7 +80,9 @@ public class StaticView extends JFrame implements PropertyChangeListener {
         String name = evt.getPropertyName();
         if (name == "g") {
             System.out.println("grow tree");
-            drawString = "[-F[-F[+F[+F][-F]][-F[+F][-F]]][+F[+F][-F]]][[+F[-F[A]][+F[A]]]";
+
+            drawString = "F[+F[+F[+F[+F[+A][-A]][-F[+A][-A]]][-F[+F[+A][-A]][-F[+A][-A]]]][-F[+F[+F[+A][-A]][-F[+A][-A]]][-F[+F[+A][-A]][-F[+A][-A]]]]][-F[+F[+F[+F[+A][-A]][-F[+A][-A]]][-F[+F[+A][-A]][-F[+A][-A]]]][-F[+F[+F[+A][-A]][-F[+A][-A]]][-F[+F[+A][-A]][-F[+A][-A]]]]]";
+            //drawString = "[-F[-F[+F[+F][-F]][-F[+F][-F]]][+F[+F][-F]]][[+F[-F[A]][+F[A]]]";
             new Turtle(grammatik, lsys, drawString);
             repaint();
        }

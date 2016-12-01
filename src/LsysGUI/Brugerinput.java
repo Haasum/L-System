@@ -14,18 +14,15 @@ import static LsysGUI.Turtle.screenHeight;
  * Der bliver bliver fokuseret mere på et advanceret indput når vi kommer til prototype 3 (sliders, knapper osv)
  */
 
-public class Brugerinput implements MouseListener, ActionListener{
+public class Brugerinput implements MouseListener, ActionListener {
 
-StaticView staticView;
+    StaticView staticView;
 
     public Brugerinput(JPanel mainPanel, StaticView staticView) {
         System.out.println("brugerinput kører");
         this.staticView = staticView;
 
         mainPanel.addMouseListener(this);
-
-
-
 
     }
 
@@ -37,15 +34,15 @@ StaticView staticView;
         int y = e.getY();
 
 
-       // g2d.fillOval(middleX-200,screenHeight-100,400,200);
+        // g2d.fillOval(middleX-200,screenHeight-100,400,200);
         /*
         middleX-200 - middleX + 200
         screenHeight-100 - screenHeight +100
         */
 
-        if ((x > middleX-200 && x < middleX+200) && (y > screenHeight-100 && y < screenHeight+100)) {
+        if ((x > middleX - 200 && x < middleX + 200) && (y > screenHeight - 100 && y < screenHeight + 100)) {
             System.out.println("start turtle");
-            staticView.firePropertyChange("g",0,1);
+            staticView.firePropertyChange("g", 0, 1);
 
         }
 
@@ -76,3 +73,6 @@ StaticView staticView;
 
     }
 }
+
+
+

@@ -5,6 +5,8 @@ import LsysRecursive.Grammatik;
 import LsysRecursive.RecursiveLsys;
 import LsysRecursive.txt;
 
+import java.math.BigDecimal;
+
 /**
  * Created by nanna on 25-10-2016.
  */
@@ -15,6 +17,7 @@ public class Controller {
      */
 
     String tree;
+    BigDecimal tree2;
 
     public Controller(){
 
@@ -29,6 +32,8 @@ public class Controller {
         System.out.println("Dette er træet, wuhuuuuuu "+tree);
 
         StaticView staticView = new StaticView();
+
+
 
 
 
