@@ -7,6 +7,8 @@ import LsysRecursive.Grammatik;
 import LsysRecursive.RecursiveLsys;
 import LsysRecursive.txt;
 
+import java.io.IOException;
+
 import static LsysGUI.StaticView.mainPanel;
 
 /**
@@ -24,12 +26,12 @@ public class Controller {
     Brugerinput brugerinput;
 
 
-    public Controller(){
+    public Controller() throws IOException {
 
 
 
         txt test = new txt();
-        String txtFile = test.getTxtInput();
+        String txtFile = test.checkTxt();
 
         Grammatik grammatik = new Grammatik(txtFile);
         RecursiveLsys lsys = new RecursiveLsys(grammatik,"K",1);
